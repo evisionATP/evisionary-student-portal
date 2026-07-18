@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
 export default function EnrollmentPortal() {
-  // Form State
+  // Form State (Now tracking email)
   const [formData, setFormData] = useState({
     studentName: '',
     whatsappNumber: '',
+    email: '',
     education: '',
     preferredBatch: '',
     verifiedChecked: false
@@ -36,9 +37,10 @@ export default function EnrollmentPortal() {
     }
   ];
 
-  // Form Validation Logic
+  // Form Validation Logic (Complete with QA-friendly patterns)
   const validateForm = () => {
     let errors = {};
+    
     if (!formData.studentName.trim()) {
       errors.studentName = "Student name is required.";
     } else if (formData.studentName.trim().length < 3) {
@@ -50,6 +52,13 @@ export default function EnrollmentPortal() {
       errors.whatsappNumber = "WhatsApp number is required.";
     } else if (!phoneRegex.test(formData.whatsappNumber)) {
       errors.whatsappNumber = "Enter a valid 10-digit Indian mobile number.";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      errors.email = "Email address is required.";
+    } else if (!emailRegex.test(formData.email.trim())) {
+      errors.email = "Please enter a valid email address.";
     }
 
     if (!formData.education) {
@@ -87,7 +96,7 @@ export default function EnrollmentPortal() {
 
       const payload = {
         fullName: formData.studentName,
-        email: "Not Collected",
+        email: formData.email.trim(),
         phone: formData.whatsappNumber,
         course: `EV Program (${formData.preferredBatch.toUpperCase()})`,
         experience: formData.education
@@ -205,7 +214,7 @@ export default function EnrollmentPortal() {
             </div>
           </div>
 
-          {/* 📝 Registration & Lead Intake Form */}
+          {/* 📝 Registration Form Layout */}
           <div id="apply" className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-6">
             <div className="text-center lg:text-left">
               <h3 className="text-xl font-extrabold text-white">Join the Pioneer Batch</h3>
@@ -224,6 +233,7 @@ export default function EnrollmentPortal() {
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} className="space-y-4">
+                {/* Field 1: Name */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Full Student Name</label>
                   <input
@@ -238,6 +248,7 @@ export default function EnrollmentPortal() {
                   {formErrors.studentName && <span data-cy="error-name" className="text-[10px] text-red-500 block mt-1">{formErrors.studentName}</span>}
                 </div>
 
+                {/* Field 2: Phone */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Active WhatsApp Number</label>
                   <input
@@ -252,6 +263,22 @@ export default function EnrollmentPortal() {
                   {formErrors.whatsappNumber && <span data-cy="error-whatsapp" className="text-[10px] text-red-500 block mt-1">{formErrors.whatsappNumber}</span>}
                 </div>
 
+                {/* NEW Field 3: Email Address Integration */}
+                <div>
+                  <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    data-cy="input-email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="name@example.com"
+                    className={`w-full bg-slate-950 border ${formErrors.email ? 'border-red-500 focus:border-red-500' : 'border-slate-800 focus:border-emerald-400'} rounded-lg py-2 px-3 text-xs text-white focus:outline-none`}
+                  />
+                  {formErrors.email && <span data-cy="error-email" className="text-[10px] text-red-500 block mt-1">{formErrors.email}</span>}
+                </div>
+
+                {/* Field 4: Education */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Educational Background</label>
                   <select
@@ -270,6 +297,7 @@ export default function EnrollmentPortal() {
                   {formErrors.education && <span data-cy="error-education" className="text-[10px] text-red-500 block mt-1">{formErrors.education}</span>}
                 </div>
 
+                {/* Field 5: Batch Schedule */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Preferred Batch Window</label>
                   <div className="grid grid-cols-2 gap-2">
@@ -300,6 +328,7 @@ export default function EnrollmentPortal() {
                   {formErrors.preferredBatch && <span data-cy="error-batch" className="text-[10px] text-red-500 block mt-1">{formErrors.preferredBatch}</span>}
                 </div>
 
+                {/* Verification Checkbox */}
                 <label className="flex items-start gap-2 pt-2 cursor-pointer">
                   <input
                     type="checkbox"
@@ -315,6 +344,7 @@ export default function EnrollmentPortal() {
                 </label>
                 {formErrors.verifiedChecked && <span data-cy="error-verification" className="text-[10px] text-red-500 block mt-1">{formErrors.verifiedChecked}</span>}
 
+                {/* Submit Button */}
                 <button
                   type="submit"
                   data-cy="btn-submit"
