@@ -36,7 +36,7 @@ export default function EnrollmentPortal() {
     }
   ];
 
-  // Form Validation Logic (QA Friendly Validation Triggers!)
+  // Form Validation Logic
   const validateForm = () => {
     let errors = {};
     if (!formData.studentName.trim()) {
@@ -80,15 +80,36 @@ export default function EnrollmentPortal() {
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       setIsLoading(true);
-      // Simulating API network delay
-      setTimeout(() => {
-        setIsLoading(false);
+
+      const payload = {
+        fullName: formData.studentName,
+        email: "Not Collected",
+        phone: formData.whatsappNumber,
+        course: `EV Program (${formData.preferredBatch.toUpperCase()})`,
+        experience: formData.education
+      };
+
+      try {
+        await fetch(import.meta.env.VITE_API_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
         setIsSubmitted(true);
-      }, 1200);
+      } catch (error) {
+        console.error('Submission error:', error);
+        alert('❌ Network connection error. Please try again.');
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -194,7 +215,6 @@ export default function EnrollmentPortal() {
             </div>
 
             {isSubmitted ? (
-              // Success Message
               <div id="success-message" className="bg-emerald-500/10 border border-emerald-500/20 p-6 rounded-xl text-center space-y-3">
                 <div className="h-12 w-12 bg-emerald-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-xl font-bold">✓</div>
                 <h4 className="text-sm font-extrabold text-white">Registration Submitted Successfully!</h4>
@@ -203,9 +223,7 @@ export default function EnrollmentPortal() {
                 </p>
               </div>
             ) : (
-              // Active Form
               <form onSubmit={handleFormSubmit} className="space-y-4">
-                {/* Field 1: Name */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Full Student Name</label>
                   <input
@@ -220,7 +238,6 @@ export default function EnrollmentPortal() {
                   {formErrors.studentName && <span data-cy="error-name" className="text-[10px] text-red-500 block mt-1">{formErrors.studentName}</span>}
                 </div>
 
-                {/* Field 2: Phone */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Active WhatsApp Number</label>
                   <input
@@ -235,7 +252,6 @@ export default function EnrollmentPortal() {
                   {formErrors.whatsappNumber && <span data-cy="error-whatsapp" className="text-[10px] text-red-500 block mt-1">{formErrors.whatsappNumber}</span>}
                 </div>
 
-                {/* Field 3: Education */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Educational Background</label>
                   <select
@@ -254,7 +270,6 @@ export default function EnrollmentPortal() {
                   {formErrors.education && <span data-cy="error-education" className="text-[10px] text-red-500 block mt-1">{formErrors.education}</span>}
                 </div>
 
-                {/* Field 4: Batch Schedule */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Preferred Batch Window</label>
                   <div className="grid grid-cols-2 gap-2">
@@ -285,7 +300,6 @@ export default function EnrollmentPortal() {
                   {formErrors.preferredBatch && <span data-cy="error-batch" className="text-[10px] text-red-500 block mt-1">{formErrors.preferredBatch}</span>}
                 </div>
 
-                {/* Verification Checkbox */}
                 <label className="flex items-start gap-2 pt-2 cursor-pointer">
                   <input
                     type="checkbox"
@@ -301,7 +315,6 @@ export default function EnrollmentPortal() {
                 </label>
                 {formErrors.verifiedChecked && <span data-cy="error-verification" className="text-[10px] text-red-500 block mt-1">{formErrors.verifiedChecked}</span>}
 
-                {/* Submit Button */}
                 <button
                   type="submit"
                   data-cy="btn-submit"
