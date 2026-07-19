@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function EnrollmentPortal() {
-  // Form State (Now tracking email)
+  // 🟢 Form State (Clean & Short: Just Core Contact + Education)
   const [formData, setFormData] = useState({
     studentName: '',
     whatsappNumber: '',
@@ -37,10 +37,25 @@ export default function EnrollmentPortal() {
     }
   ];
 
-  // Form Validation Logic (Complete with QA-friendly patterns)
+  // 📋 Grouped Career Tracks (Your Professional Roles List!)
+  const careerTracks = [
+    {
+      category: "Engineering & Management Leadership",
+      roles: ["Head Service", "Service Manager", "Service Engineer", "Shift Incharge / Supervisor", "Service Trainee"]
+    },
+    {
+      category: "Technical & Electrical Workshop Operations",
+      roles: ["Senior Electrician", "Electrician", "Helper Electrician / E-Helper", "Senior Mechanic", "Mechanic", "Helper Technician", "Denter", "Painter", "Tyre Supervisor", "Tyreman / Tyre Technician"]
+    },
+    {
+      category: "Logistics, Admin & Fleet Operations",
+      roles: ["DBM Operator / MIS", "Store Manager / Store Incharge", "Store Executive / Store Picker", "Admin / Accounts"]
+    }
+  ];
+
+  // Form Validation Logic
   const validateForm = () => {
     let errors = {};
-    
     if (!formData.studentName.trim()) {
       errors.studentName = "Student name is required.";
     } else if (formData.studentName.trim().length < 3) {
@@ -83,7 +98,6 @@ export default function EnrollmentPortal() {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
-    // Clear field-specific error as user types
     if (formErrors[name]) {
       setFormErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -142,6 +156,7 @@ export default function EnrollmentPortal() {
           </div>
           <div className="flex gap-4 text-xs font-semibold">
             <a href="#curriculum" className="text-slate-400 hover:text-emerald-400 transition-colors">Course Outline</a>
+            <a href="#pathways" className="text-slate-400 hover:text-emerald-400 transition-colors">Career Roles</a>
             <a href="#apply" className="bg-emerald-500 text-slate-950 px-4 py-1.5 rounded-lg hover:bg-emerald-400 transition-all font-black">Register Now</a>
           </div>
         </div>
@@ -214,7 +229,7 @@ export default function EnrollmentPortal() {
             </div>
           </div>
 
-          {/* 📝 Registration Form Layout */}
+          {/* 📝 Short & High-Converting Registration Form */}
           <div id="apply" className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-6">
             <div className="text-center lg:text-left">
               <h3 className="text-xl font-extrabold text-white">Join the Pioneer Batch</h3>
@@ -233,57 +248,49 @@ export default function EnrollmentPortal() {
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} className="space-y-4">
-                {/* Field 1: Name */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Full Student Name</label>
                   <input
                     type="text"
                     name="studentName"
-                    data-cy="input-student-name"
                     value={formData.studentName}
                     onChange={handleInputChange}
                     placeholder="Enter your name as per certificate"
                     className={`w-full bg-slate-950 border ${formErrors.studentName ? 'border-red-500 focus:border-red-500' : 'border-slate-800 focus:border-emerald-400'} rounded-lg py-2 px-3 text-xs text-white focus:outline-none`}
                   />
-                  {formErrors.studentName && <span data-cy="error-name" className="text-[10px] text-red-500 block mt-1">{formErrors.studentName}</span>}
+                  {formErrors.studentName && <span className="text-[10px] text-red-500 block mt-1">{formErrors.studentName}</span>}
                 </div>
 
-                {/* Field 2: Phone */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Active WhatsApp Number</label>
                   <input
                     type="text"
                     name="whatsappNumber"
-                    data-cy="input-whatsapp"
                     value={formData.whatsappNumber}
                     onChange={handleInputChange}
                     placeholder="10-digit mobile number"
                     className={`w-full bg-slate-950 border ${formErrors.whatsappNumber ? 'border-red-500 focus:border-red-500' : 'border-slate-800 focus:border-emerald-400'} rounded-lg py-2 px-3 text-xs text-white focus:outline-none`}
                   />
-                  {formErrors.whatsappNumber && <span data-cy="error-whatsapp" className="text-[10px] text-red-500 block mt-1">{formErrors.whatsappNumber}</span>}
+                  {formErrors.whatsappNumber && <span className="text-[10px] text-red-500 block mt-1">{formErrors.whatsappNumber}</span>}
                 </div>
 
-                {/* NEW Field 3: Email Address Integration */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Email Address</label>
                   <input
                     type="email"
                     name="email"
-                    data-cy="input-email"
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="name@example.com"
                     className={`w-full bg-slate-950 border ${formErrors.email ? 'border-red-500 focus:border-red-500' : 'border-slate-800 focus:border-emerald-400'} rounded-lg py-2 px-3 text-xs text-white focus:outline-none`}
                   />
-                  {formErrors.email && <span data-cy="error-email" className="text-[10px] text-red-500 block mt-1">{formErrors.email}</span>}
+                  {formErrors.email && <span className="text-[10px] text-red-500 block mt-1">{formErrors.email}</span>}
                 </div>
 
-                {/* Field 4: Education */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Educational Background</label>
                   <select
                     name="education"
-                    data-cy="select-education"
                     value={formData.education}
                     onChange={handleInputChange}
                     className={`w-full bg-slate-950 border ${formErrors.education ? 'border-red-500' : 'border-slate-800'} rounded-lg py-2 px-3 text-xs text-slate-300 focus:outline-none focus:border-emerald-400`}
@@ -294,10 +301,9 @@ export default function EnrollmentPortal() {
                     <option value="BTech">B.E. / B.Tech Graduate</option>
                     <option value="Other">Other Technical Background</option>
                   </select>
-                  {formErrors.education && <span data-cy="error-education" className="text-[10px] text-red-500 block mt-1">{formErrors.education}</span>}
+                  {formErrors.education && <span className="text-[10px] text-red-500 block mt-1">{formErrors.education}</span>}
                 </div>
 
-                {/* Field 5: Batch Schedule */}
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Preferred Batch Window</label>
                   <div className="grid grid-cols-2 gap-2">
@@ -325,15 +331,13 @@ export default function EnrollmentPortal() {
                       </label>
                     ))}
                   </div>
-                  {formErrors.preferredBatch && <span data-cy="error-batch" className="text-[10px] text-red-500 block mt-1">{formErrors.preferredBatch}</span>}
+                  {formErrors.preferredBatch && <span className="text-[10px] text-red-500 block mt-1">{formErrors.preferredBatch}</span>}
                 </div>
 
-                {/* Verification Checkbox */}
                 <label className="flex items-start gap-2 pt-2 cursor-pointer">
                   <input
                     type="checkbox"
                     name="verifiedChecked"
-                    data-cy="checkbox-verification"
                     checked={formData.verifiedChecked}
                     onChange={handleInputChange}
                     className="mt-1 accent-emerald-500 rounded"
@@ -342,12 +346,10 @@ export default function EnrollmentPortal() {
                     I confirm my genuine interest in joining this EV upskilling program in Anantapur and understand that seats are limited to 30 per batch.
                   </span>
                 </label>
-                {formErrors.verifiedChecked && <span data-cy="error-verification" className="text-[10px] text-red-500 block mt-1">{formErrors.verifiedChecked}</span>}
+                {formErrors.verifiedChecked && <span className="text-[10px] text-red-500 block mt-1">{formErrors.verifiedChecked}</span>}
 
-                {/* Submit Button */}
                 <button
                   type="submit"
-                  data-cy="btn-submit"
                   disabled={isLoading}
                   className="w-full bg-emerald-500 text-slate-950 py-3 rounded-lg hover:bg-emerald-400 transition-all text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2"
                 >
@@ -362,6 +364,37 @@ export default function EnrollmentPortal() {
                 </button>
               </form>
             )}
+          </div>
+        </section>
+
+        {/* 📋 NEW: High-Impact Industry Placement Pathways Section */}
+        <section id="pathways" className="border-t border-slate-900 pt-16 space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400">Employment Vetting Roadmap</span>
+            <h3 className="text-2xl font-black text-white">Careers We Build & Prepare You For</h3>
+            <p className="text-xs text-slate-400">
+              Our intensive laboratory curriculum maps directly to standard industry positions. We prepare candidates to confidently step into the following professional roles within major commercial Indian EV ecosystem networks:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {careerTracks.map((track, idx) => (
+              <div key={idx} className="bg-slate-900/30 border border-slate-900 rounded-2xl p-5 space-y-4">
+                <h4 className="text-xs font-extrabold text-emerald-400 uppercase tracking-wider border-b border-slate-900 pb-2">
+                  {track.category}
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {track.roles.map((role, roleIdx) => (
+                    <span 
+                      key={roleIdx} 
+                      className="bg-slate-950 text-slate-300 border border-slate-800 text-[10px] font-medium px-2.5 py-1 rounded-md shadow-sm hover:border-emerald-500/30 transition-colors"
+                    >
+                      {role}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       </main>
