@@ -284,22 +284,36 @@ export default function EnrollmentPortal() {
             </div>
           </div>
 
-          {/* 📝 Short Registration Form */}
+          {/* 📝 Short Registration Form Container */}
           <div id="apply" className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-6">
             <div className="text-center lg:text-left">
               <h3 className="text-xl font-extrabold text-white">Join the Pioneer Batch</h3>
               <p className="text-xs text-slate-400 mt-1">
-                Secure your ₹3,000 early admission scholarship token. Only 30 slots available.
+                Secure your early admission scholarship token. Only 30 slots available per batch schedule.
               </p>
             </div>
 
+            {/* 🔄 Upgraded Post-Registration Operational Success Block */}
             {isSubmitted ? (
               <div id="success-message" className="bg-emerald-500/10 border border-emerald-500/20 p-6 rounded-xl text-center space-y-3">
-                <div className="h-12 w-12 bg-emerald-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-xl font-bold">✓</div>
-                <h4 className="text-sm font-extrabold text-white">Registration Submitted Successfully!</h4>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Thank you for registering. Our Technical Director, Dileep, or Center Coordinator, Abhiram, will reach out to you on WhatsApp within 24 hours to schedule your physical lab visit.
+                <div className="h-12 w-12 bg-emerald-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-xl font-bold shadow-lg shadow-emerald-500/20">
+                  ✓
+                </div>
+                <h4 className="text-sm font-black text-white uppercase tracking-wider">
+                  Registration Secured Successfully!
+                </h4>
+                <p className="text-xs text-slate-400 leading-relaxed max-w-md mx-auto">
+                  Thank you for choosing E Visionary Solutions India. An industrial technical onboarding blueprint has been dispatched straight to your personal email inbox.
                 </p>
+                <div className="bg-slate-950/60 border border-slate-850 p-4 rounded-xl text-left mt-2 space-y-2">
+                  <span className="text-[9px] uppercase font-bold tracking-widest text-emerald-400 block">
+                    Next Operational Steps:
+                  </span>
+                  <p className="text-[11px] text-slate-300 leading-normal">
+                    • Technical Director <strong className="text-white">Dileep</strong> or Center Coordinator <strong className="text-white">Abhiram</strong> will message your active WhatsApp line within 24 hours to coordinate your physical laboratory tour layout.<br />
+                    • For direct verification queries or scheduling, contact us anytime at: <a href="mailto:admissions@evisionarysolutionsindia.com" className="text-emerald-400 font-bold hover:underline">admissions@evisionarysolutionsindia.com</a>
+                  </p>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} className="space-y-4">
