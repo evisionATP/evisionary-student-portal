@@ -53,6 +53,22 @@ export default function EnrollmentPortal() {
     }
   ];
 
+  // 🏢 Corporate Hiring Partners Ecosystem Array
+  const hiringPartners = [
+    {
+      segment: "Commercial EV OEMs & Manufacturers",
+      companies: ["Olectra Greentech", "JBM Auto", "Tata Motors Commercial", "Switch Mobility (Ashok Leyland)", "Euler Motors", "Altigreen"]
+    },
+    {
+      segment: "EV Fleet Operators & Logistics Networks",
+      companies: ["BluSmart Mobility", "MoEVing Cargo", "Zypp Electric", "Lithium Urban Technologies"]
+    },
+    {
+      segment: "Battery Chemistries & Infrastructure Partners",
+      companies: ["Amara Raja Energy & Mobility", "Exide Energy Solutions", "Log9 Materials", "Lohum Cleantech"]
+    }
+  ];
+
   // 📸 Dynamic Lab Gallery Assets Array (Updated to .png)
   const labGallery = [
     { src: "/images/photo1.png", desc: "Full-scale commercial EV heavy vehicle lift bays for hands-on under-chassis fleet troubleshooting." },
@@ -169,8 +185,9 @@ export default function EnrollmentPortal() {
             </span>
           </div>
           <div className="flex gap-4 text-xs font-semibold">
-            <a href="#curriculum" className="text-slate-400 hover:text-emerald-400 transition-colors">Course Outline</a>
+            <a href="#curriculum" className="text-slate-400 hover:text-emerald-400 transition-colors">Outline</a>
             <a href="#pathways" className="text-slate-400 hover:text-emerald-400 transition-colors">Careers</a>
+            <a href="#partners" className="text-slate-400 hover:text-emerald-400 transition-colors">Hiring Network</a>
             <a href="#gallery" className="text-slate-400 hover:text-emerald-400 transition-colors">Lab Gallery</a>
             <a href="#apply" className="bg-emerald-500 text-slate-950 px-4 py-1.5 rounded-lg hover:bg-emerald-400 transition-all font-black">Register Now</a>
           </div>
@@ -411,7 +428,42 @@ export default function EnrollmentPortal() {
           </div>
         </section>
 
-        {/* 📸 🟢 NEW: High-Impact Infrastructure & Diagnostic Lab Gallery Block */}
+        {/* 🏢 🟢 NEW: High-Impact Placement & Corporate Hiring Partners Section */}
+        <section id="partners" className="border-t border-slate-900 pt-16 space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400">Placement Network Ecosystem</span>
+            <h3 className="text-2xl font-black text-white">Target Corporate Placement Pipelines</h3>
+            <p className="text-xs text-slate-400">
+              Our student performance metrics, practical lab grades, and safety certifications help bridge the technical talent gap for leading entities across the Indian EV industry:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {hiringPartners.map((partnerGroup, idx) => (
+              <div key={idx} className="bg-slate-900/20 border border-slate-900/60 rounded-xl p-5 flex flex-col justify-between hover:border-emerald-500/20 transition-all">
+                <div>
+                  <h4 className="text-[11px] font-black text-white uppercase tracking-widest mb-3 pb-2 border-b border-slate-900 flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                    {partnerGroup.segment}
+                  </h4>
+                  <ul className="space-y-2">
+                    {partnerGroup.companies.map((company, companyIdx) => (
+                      <li key={companyIdx} className="flex items-center text-xs text-slate-400 font-medium">
+                        <span className="text-emerald-500 mr-2 font-bold">→</span>
+                        {company}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mt-4 pt-3 border-t border-slate-900/40 text-[9px] text-slate-500 font-bold uppercase tracking-wider">
+                  Mapped Placement Target
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 📸 High-Impact Infrastructure & Diagnostic Lab Gallery Block */}
         <section id="gallery" className="border-t border-slate-900 pt-16 space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400">Inside the Anantapur Center</span>
@@ -425,7 +477,6 @@ export default function EnrollmentPortal() {
             {labGallery.map((item, idx) => (
               <div key={idx} className="bg-slate-900/40 border border-slate-900 rounded-xl overflow-hidden shadow-xl flex flex-col group hover:border-emerald-500/30 transition-all duration-300">
                 <div className="aspect-video sm:aspect-square w-full bg-slate-950 overflow-hidden relative">
-                  {/* Dynamic image loading overlay */}
                   <img 
                     src={item.src} 
                     alt={`EV Lab Station ${idx + 1}`}
@@ -435,7 +486,6 @@ export default function EnrollmentPortal() {
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
-                  {/* CSS Diagnostic Placeholder Fallback UI if assets are compiling */}
                   <div className="hidden absolute inset-0 bg-slate-900 items-center justify-center p-4 text-center border-b border-slate-800">
                     <span className="text-[10px] text-slate-500 uppercase font-bold tracking-widest block">🔧 Lab Station {idx + 1}</span>
                   </div>
@@ -454,7 +504,7 @@ export default function EnrollmentPortal() {
       {/* 📄 Footer Section */}
       <footer className="border-t border-slate-900 bg-slate-950 py-8 px-4 text-center space-y-2">
         <p className="text-[10px] text-slate-500">
-          © {new Date().getFullYear()} M/S E VISIONARY SOLUTIONS INDIA. All Rights Reserved. [No: 42 of 2026].
+          © {new Date().getFullYear()} EVISIONARY SOLUTIONS INDIA. All Rights Reserved. [No: 42 of 2026].
         </p>
         <p className="text-[9px] text-slate-600 max-w-lg mx-auto">
           Operational Center: Anantapur, Andhra Pradesh. All candidate assessments, test scores, and program data are monitored and securely logged to provide vetted manpower solutions to commercial Indian EV manufacturers.
