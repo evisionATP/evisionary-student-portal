@@ -201,7 +201,7 @@ export default function EnrollmentPortal() {
             </a>
             <div>
               <h1 className="text-lg font-black tracking-tight text-white uppercase">
-                E VISIONARY SOLUTIONS INDIA
+                EVISIONARY SOLUTIONS INDIA
               </h1>
               <span className="text-[10px] text-emerald-400 font-bold tracking-widest block uppercase">
                 Regd No. 42 of 2026 • Anantapur, AP
