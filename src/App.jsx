@@ -178,7 +178,7 @@ export default function EnrollmentPortal() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
           <div className="text-center sm:text-left">
             <h1 className="text-lg font-black tracking-tight text-white uppercase">
-              E VISIONARY SOLUTIONS INDIA
+              EVISIONARY SOLUTIONS INDIA
             </h1>
             <span className="text-[10px] text-emerald-400 font-bold tracking-widest block uppercase">
               Regd No. 42 of 2026 • Anantapur, AP
