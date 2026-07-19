@@ -198,8 +198,8 @@ export default function EnrollmentPortal() {
             {[
               { label: "Course Duration", value: "45 Days (Full-Time)" },
               { label: "Lab Location", value: "Anantapur, AP" },
-              { label: "Launch Seats", value: "30 Available" },
-              { label: "Fee Option", value: "Easy 3-Part Installments" }
+              { label: "Launch Seats", value: "50 Available" },
+              { label: "Fee Option", value: "Easy 2-Part Installments" }
             ].map((m, idx) => (
               <div key={idx} className="bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
                 <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider block">{m.label}</span>
