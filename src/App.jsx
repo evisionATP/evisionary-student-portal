@@ -175,15 +175,40 @@ export default function EnrollmentPortal() {
       
       {/* 🟢 Top Navigation Bar */}
       <header className="border-b border-slate-900 bg-slate-900/40 backdrop-blur-md sticky top-0 z-50 px-4 py-4 md:px-8">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
-          <div className="text-center sm:text-left">
-            <h1 className="text-lg font-black tracking-tight text-white uppercase">
-              EVISIONARY SOLUTIONS INDIA
-            </h1>
-            <span className="text-[10px] text-emerald-400 font-bold tracking-widest block uppercase">
-              Regd No. 42 of 2026 • Anantapur, AP
-            </span>
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+          
+          {/* ⚡ Custom EV Power-Home Brand Block */}
+          <div className="flex items-center gap-3 text-center sm:text-left">
+            <a 
+              href="#" 
+              className="p-2 bg-slate-950 border border-slate-800 rounded-xl text-emerald-400 hover:border-emerald-400 hover:bg-emerald-500/10 transition-all shadow-md group"
+              title="Home Base"
+            >
+              <svg 
+                className="h-5 w-5 transition-transform group-hover:scale-110" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                {/* Structural House Outline */}
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                {/* EV Clean-Energy Core (Lightning Bolt) */}
+                <path d="M13 7.5l-3.5 4.5h3.5l-1 5.5 3.5-4.5h-3.5z" fill="currentColor" className="text-emerald-400" />
+              </svg>
+            </a>
+            <div>
+              <h1 className="text-lg font-black tracking-tight text-white uppercase">
+                E VISIONARY SOLUTIONS INDIA
+              </h1>
+              <span className="text-[10px] text-emerald-400 font-bold tracking-widest block uppercase">
+                Regd No. 42 of 2026 • Anantapur, AP
+              </span>
+            </div>
           </div>
+
           <div className="flex gap-4 text-xs font-semibold">
             <a href="#curriculum" className="text-slate-400 hover:text-emerald-400 transition-colors">Outline</a>
             <a href="#pathways" className="text-slate-400 hover:text-emerald-400 transition-colors">Careers</a>
@@ -428,7 +453,7 @@ export default function EnrollmentPortal() {
           </div>
         </section>
 
-        {/* 🏢 🟢 NEW: High-Impact Placement & Corporate Hiring Partners Section */}
+        {/* 🏢 Placement & Corporate Hiring Partners Section */}
         <section id="partners" className="border-t border-slate-900 pt-16 space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400">Placement Network Ecosystem</span>
@@ -504,7 +529,7 @@ export default function EnrollmentPortal() {
       {/* 📄 Footer Section */}
       <footer className="border-t border-slate-900 bg-slate-950 py-8 px-4 text-center space-y-2">
         <p className="text-[10px] text-slate-500">
-          © {new Date().getFullYear()} EVISIONARY SOLUTIONS INDIA. All Rights Reserved. [No: 42 of 2026].
+          © {new Date().getFullYear()} M/S EVISIONARY SOLUTIONS INDIA. All Rights Reserved. [No: 42 of 2026].
         </p>
         <p className="text-[9px] text-slate-600 max-w-lg mx-auto">
           Operational Center: Anantapur, Andhra Pradesh. All candidate assessments, test scores, and program data are monitored and securely logged to provide vetted manpower solutions to commercial Indian EV manufacturers.
