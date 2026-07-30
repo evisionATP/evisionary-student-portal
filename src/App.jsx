@@ -79,7 +79,6 @@ export default function App() {
     { src: "/images/photo6.png", desc: "Diagnostic tracking on dual-stage motor control units and high-current shielded power lines." },
     { src: "/images/photo7.png", desc: "Troubleshooting heavy-vehicle pneumatic air systems and auxiliary thermal cooling radiators." },
     { src: "/images/photo8.png", desc: "Exploring complex copper-tubed battery thermal management systems and climate control filtration rigs." },
-  
   ];
 
   // Form Validation Logic
@@ -175,7 +174,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070E1C] text-slate-100 relative overflow-hidden font-sans selection:bg-orange-500 selection:text-white">
+    <div className="min-h-screen bg-[#070E1C] text-slate-100 relative overflow-x-hidden font-sans selection:bg-orange-500 selection:text-white">
       
       {/* 🌟 Ambient Electric Lighting Glows */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px] pointer-events-none" />
@@ -191,18 +190,19 @@ export default function App() {
         }}
       />
 
-      {/* 💡 Top Accent Cyber Line */}
-      <div className="h-1 w-full bg-gradient-to-r from-cyan-500 via-orange-500 to-blue-600 relative z-50" />
+      {/* 🟢 FIXED Top Navigation Bar (Stays Pinned On Scroll) */}
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-800/80 bg-[#070E1C]/90 backdrop-blur-md px-4 py-3 md:px-8 shadow-xl">
+        {/* 💡 Top Accent Cyber Line */}
+        <div className="h-1 w-full bg-gradient-to-r from-cyan-500 via-orange-500 to-blue-600 absolute top-0 left-0 right-0" />
 
-      {/* 🟢 Top Navigation Bar (Sticky with Smooth Scroll Home Button) */}
-      <header className="border-b border-slate-800/80 bg-[#070E1C]/80 backdrop-blur-md sticky top-0 z-50 px-4 py-4 md:px-8">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3 pt-1">
           
           {/* ⚡ Custom EV Power-Home Brand Block */}
           <div className="flex items-center gap-3 text-center sm:text-left">
             <button 
               onClick={scrollToTop}
-              className="p-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-orange-400 hover:border-orange-400 hover:bg-orange-500/20 active:scale-95 transition-all shadow-md group cursor-pointer"
+              type="button"
+              className="p-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-orange-400 hover:border-orange-400 hover:bg-orange-500/20 active:scale-95 transition-all shadow-md group cursor-pointer flex-shrink-0"
               title="Return to Top"
             >
               <svg 
@@ -244,8 +244,8 @@ export default function App() {
         </div>
       </header>
 
-      {/* ⚡ Hero Section */}
-      <main className="relative z-10 max-w-6xl mx-auto px-4 py-12 md:py-20 space-y-20">
+      {/* ⚡ Hero Section (Added Padding Top to prevent overlap with fixed navbar) */}
+      <main className="relative z-10 max-w-6xl mx-auto px-4 pt-32 md:pt-36 pb-12 md:pb-20 space-y-20">
         <section className="text-center space-y-6 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-full text-xs text-orange-400 font-semibold shadow-inner">
             <span className="h-2 w-2 rounded-full bg-orange-400 animate-pulse"></span>
