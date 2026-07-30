@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import AboutUs from './components/AboutUs'; // 👈 Import AboutUs component
+import AboutUs from './components/AboutUs';
 
 export default function App() {
-  // Navigation View State ('home' or 'about')
   const [currentView, setCurrentView] = useState('home');
 
-  // Form State
   const [formData, setFormData] = useState({
     studentName: '',
     whatsappNumber: '',
@@ -15,13 +13,11 @@ export default function App() {
     verifiedChecked: false
   });
 
-  // UI States
   const [activeAccordion, setActiveAccordion] = useState(null);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // 45-Day Syllabus Data
   const syllabusDays = [
     {
       title: "Phase 1: High-Voltage Safety & Tools (Days 1–10)",
@@ -41,7 +37,6 @@ export default function App() {
     }
   ];
 
-  // Grouped Career Tracks
   const careerTracks = [
     {
       category: "Engineering & Management Leadership",
@@ -57,7 +52,6 @@ export default function App() {
     }
   ];
 
-  // Corporate Hiring Partners Ecosystem Array
   const hiringPartners = [
     {
       segment: "Commercial EV OEMs & Manufacturers",
@@ -73,7 +67,6 @@ export default function App() {
     }
   ];
 
-  // Dynamic Lab Gallery Assets Array
   const labGallery = [
     { src: "/images/photo1.png", desc: "Full-scale commercial EV heavy vehicle lift bays for hands-on under-chassis fleet troubleshooting." },
     { src: "/images/photo2.png", desc: "Smart interactive digital lab setups for tracking real-time CAN bus telemetry and BMS analytics." },
@@ -85,7 +78,6 @@ export default function App() {
     { src: "/images/photo8.png", desc: "Exploring complex copper-tubed battery thermal management systems and climate control filtration rigs." },
   ];
 
-  // Form Validation Logic
   const validateForm = () => {
     let errors = {};
     if (!formData.studentName.trim()) {
@@ -180,7 +172,6 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // 🔄 Render About Us Page View if triggered
   if (currentView === 'about') {
     return <AboutUs onNavigateBack={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />;
   }
@@ -189,11 +180,10 @@ export default function App() {
     <div className="min-h-screen bg-[#070E1C] text-slate-100 relative overflow-x-hidden font-sans selection:bg-orange-500 selection:text-white">
       
       {/* 🌟 Ambient Electric Lighting Glows */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute top-1/3 -right-32 w-[500px] h-[500px] bg-orange-500/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute -bottom-32 left-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute -top-32 -left-32 w-72 h-72 sm:w-96 sm:h-96 bg-cyan-500/15 rounded-full blur-[100px] sm:blur-[128px] pointer-events-none" />
+      <div className="absolute top-1/3 -right-32 w-80 h-80 sm:w-[500px] sm:h-[500px] bg-orange-500/15 rounded-full blur-[110px] sm:blur-[140px] pointer-events-none" />
 
-      {/* 📐 Subtle High-Tech Grid Pattern Overlay */}
+      {/* 📐 High-Tech Grid Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
@@ -202,124 +192,116 @@ export default function App() {
         }}
       />
 
-      {/* 🟢 FIXED Top Navigation Bar */}
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-800/80 bg-[#070E1C]/90 backdrop-blur-md px-4 py-3 md:px-8 shadow-xl">
+      {/* 🟢 FIXED Compact Mobile-Friendly Top Navigation */}
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-800/80 bg-[#070E1C]/95 backdrop-blur-md px-3 py-2.5 sm:px-8 sm:py-3 shadow-xl">
         <div className="h-1 w-full bg-gradient-to-r from-cyan-500 via-orange-500 to-blue-600 absolute top-0 left-0 right-0" />
 
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3 pt-1">
-          
-          {/* ⚡ Custom EV Power-Home Brand Block */}
-          <div className="flex items-center gap-3 text-center sm:text-left">
-            <button 
-              onClick={scrollToTop}
-              type="button"
-              className="p-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-orange-400 hover:border-orange-400 hover:bg-orange-500/20 active:scale-95 transition-all shadow-md group cursor-pointer flex-shrink-0"
-              title="Return to Home / Top"
-            >
-              <svg 
-                className="h-5 w-5 transition-transform group-hover:scale-110" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2.5" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
+        <div className="max-w-6xl mx-auto flex flex-col gap-2 pt-1">
+          {/* Top Brand Bar */}
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2.5">
+              <button 
+                onClick={scrollToTop}
+                type="button"
+                className="p-2 bg-slate-900 border border-slate-700/80 rounded-lg text-orange-400 hover:border-orange-400 hover:bg-orange-500/20 active:scale-95 transition-all shadow-md flex-shrink-0 cursor-pointer"
+                title="Return to Home"
               >
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <path d="M13 7.5l-3.5 4.5h3.5l-1 5.5 3.5-4.5h-3.5z" fill="currentColor" className="text-orange-400" />
-              </svg>
-            </button>
-            <div>
-              <h1 className="text-lg font-black tracking-tight text-white uppercase cursor-pointer" onClick={scrollToTop}>
-                <span className="text-orange-400 drop-shadow-[0_0_12px_rgba(249,115,22,0.8)]">EV</span>ISIONARY SOLUTIONS INDIA
-              </h1>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] text-orange-400 font-bold tracking-widest uppercase">
+                <svg className="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <path d="M13 7.5l-3.5 4.5h3.5l-1 5.5 3.5-4.5h-3.5z" fill="currentColor" className="text-orange-400" />
+                </svg>
+              </button>
+              <div>
+                <h1 className="text-xs sm:text-base font-black tracking-tight text-white uppercase cursor-pointer leading-tight" onClick={scrollToTop}>
+                  <span className="text-orange-400 drop-shadow-[0_0_12px_rgba(249,115,22,0.8)]">EV</span>ISIONARY SOLUTIONS INDIA
+                </h1>
+                <p className="text-[8px] sm:text-[10px] text-orange-400/90 font-bold tracking-wider uppercase">
                   Regd No. 42 of 2026 • Anantapur, AP
-                </span>
-                <span className="text-[9px] bg-slate-800 text-cyan-400 px-1.5 py-0.5 rounded font-extrabold border border-cyan-500/30">
-                  ASDC & NSDC Aligned
-                </span>
+                </p>
               </div>
             </div>
+
+            <a href="#apply" className="sm:hidden bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 px-3 py-1 rounded-md font-black text-[10px] uppercase shadow-md whitespace-nowrap">
+              Apply
+            </a>
           </div>
 
-          {/* 🔗 Navigation Links */}
-          <div className="flex gap-4 text-xs font-semibold items-center">
+          {/* Touch-Scrollable Horizontal Navigation Strip for Mobile */}
+          <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap pb-1 pt-0.5 text-[11px] sm:text-xs font-semibold scrollbar-none border-t border-slate-800/40">
             <button 
               onClick={() => setCurrentView('about')} 
-              className="text-orange-400 font-extrabold hover:text-orange-300 transition-colors cursor-pointer bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-lg"
+              className="text-orange-400 font-extrabold bg-orange-500/10 border border-orange-500/30 px-2.5 py-0.5 rounded-md flex-shrink-0"
             >
               About Us
             </button>
-            <a href="#curriculum" className="text-slate-300 hover:text-orange-400 transition-colors">Outline</a>
-            <a href="#pathways" className="text-slate-300 hover:text-orange-400 transition-colors">Careers</a>
-            <a href="#partners" className="text-slate-300 hover:text-orange-400 transition-colors">Hiring Network</a>
-            <a href="#gallery" className="text-slate-300 hover:text-orange-400 transition-colors">Lab Gallery</a>
-            <a href="#apply" className="bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 px-4 py-1.5 rounded-lg hover:brightness-110 transition-all font-black shadow-lg shadow-orange-500/20">Register Now</a>
+            <a href="#curriculum" className="text-slate-300 hover:text-orange-400 px-2 py-0.5 flex-shrink-0">Outline</a>
+            <a href="#pathways" className="text-slate-300 hover:text-orange-400 px-2 py-0.5 flex-shrink-0">Careers</a>
+            <a href="#partners" className="text-slate-300 hover:text-orange-400 px-2 py-0.5 flex-shrink-0">Hiring Network</a>
+            <a href="#gallery" className="text-slate-300 hover:text-orange-400 px-2 py-0.5 flex-shrink-0">Lab Gallery</a>
+            <a href="#apply" className="hidden sm:inline-block bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 px-3 py-1 rounded-lg font-black shadow-lg shadow-orange-500/20 ml-auto">Register Now</a>
           </div>
         </div>
       </header>
 
       {/* ⚡ Hero Section */}
-      <main className="relative z-10 max-w-6xl mx-auto px-4 pt-32 md:pt-36 pb-12 md:pb-20 space-y-20">
-        <section className="text-center space-y-6 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-full text-xs text-orange-400 font-semibold shadow-inner">
+      <main className="relative z-10 max-w-6xl mx-auto px-4 pt-28 sm:pt-36 pb-12 sm:pb-20 space-y-16 sm:space-y-20">
+        <section className="text-center space-y-4 sm:space-y-6 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 bg-orange-500/10 border border-orange-500/30 px-2.5 py-1 rounded-full text-[10px] sm:text-xs text-orange-400 font-semibold shadow-inner">
             <span className="h-2 w-2 rounded-full bg-orange-400 animate-pulse"></span>
             India's EV Technical Capital Launching in Anantapur
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
             Power India's EV Future. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-cyan-400">
               Get Certified and Placed in 60 Days.
             </span>
           </h2>
           
-          <p className="text-sm md:text-base text-slate-300 leading-relaxed">
+          <p className="text-xs sm:text-base text-slate-300 leading-relaxed px-2">
             Hands-on practical training aligned with ASDC & NSDC standards for ITI, Diploma, and Engineering students. Step away from traditional textbooks and troubleshoot real battery packs, motor powertrains, and BMS software systems.
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 text-left">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 pt-4 text-left">
             {[
               { label: "Course Duration", value: "60 Days (Intensive)" },
               { label: "Lab Location", value: "Anantapur, AP" },
               { label: "Launch Seats", value: "30 Available / Batch" },
               { label: "Fee Option", value: "Easy 2-Part Installments" }
             ].map((m, idx) => (
-              <div key={idx} className="bg-slate-900/60 backdrop-blur-sm border border-slate-800 p-4 rounded-2xl shadow-lg hover:border-slate-700 transition-all">
-                <span className="text-[10px] text-orange-400 uppercase font-bold tracking-wider block">{m.label}</span>
-                <span className="text-sm font-extrabold text-white mt-1 block">{m.value}</span>
+              <div key={idx} className="bg-slate-900/60 backdrop-blur-sm border border-slate-800 p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg">
+                <span className="text-[9px] sm:text-[10px] text-orange-400 uppercase font-bold tracking-wider block">{m.label}</span>
+                <span className="text-xs sm:text-sm font-extrabold text-white mt-0.5 block">{m.value}</span>
               </div>
             ))}
           </div>
         </section>
 
         {/* 📚 Interactive Curriculum Section */}
-        <section id="curriculum" className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          <div className="space-y-6">
+        <section id="curriculum" className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
+          <div className="space-y-4 sm:space-y-6">
             <div>
               <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Classroom Setup</span>
-              <h3 className="text-2xl font-black text-white mt-1">What You Will Master</h3>
-              <p className="text-xs text-slate-300 mt-2">
-                Our syllabus is continuously tested to match hiring criteria established by leading Indian OEMs, battery manufacturers, and fleet operators.
+              <h3 className="text-xl sm:text-2xl font-black text-white mt-1">What You Will Master</h3>
+              <p className="text-xs text-slate-300 mt-1">
+                Our syllabus matches hiring criteria established by leading Indian OEMs, battery manufacturers, and fleet operators.
               </p>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2.5 sm:space-y-3">
               {syllabusDays.map((phase, idx) => (
-                <div key={idx} className="bg-slate-900/80 backdrop-blur-md border border-slate-800 rounded-2xl overflow-hidden transition-all hover:border-slate-700">
+                <div key={idx} className="bg-slate-900/80 backdrop-blur-md border border-slate-800 rounded-xl sm:rounded-2xl overflow-hidden">
                   <button
                     onClick={() => toggleAccordion(idx)}
-                    className="w-full text-left px-5 py-4 flex justify-between items-center focus:outline-none hover:bg-slate-800/50 transition-colors"
+                    className="w-full text-left px-4 py-3.5 sm:px-5 sm:py-4 flex justify-between items-center focus:outline-none"
                   >
-                    <span className="text-xs font-extrabold text-white">{phase.title}</span>
-                    <span className="text-orange-400 text-lg font-bold">
+                    <span className="text-xs font-extrabold text-white pr-2">{phase.title}</span>
+                    <span className="text-orange-400 text-base font-bold flex-shrink-0">
                       {activeAccordion === idx ? '−' : '+'}
                     </span>
                   </button>
                   {activeAccordion === idx && (
-                    <div className="px-5 pb-5 pt-1 text-xs text-slate-300 leading-relaxed border-t border-slate-800/50">
+                    <div className="px-4 pb-4 pt-1 sm:px-5 sm:pb-5 text-xs text-slate-300 leading-relaxed border-t border-slate-800/50">
                       {phase.content}
                     </div>
                   )}
@@ -329,40 +311,36 @@ export default function App() {
           </div>
 
           {/* 📝 Registration Form Container */}
-          <div id="apply" className="bg-slate-900/90 backdrop-blur-md border border-orange-500/20 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl shadow-black/80 relative">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl pointer-events-none" />
-
+          <div id="apply" className="bg-slate-900/90 backdrop-blur-md border border-orange-500/20 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-5 shadow-2xl relative">
             <div className="text-center lg:text-left relative z-10">
               <span className="text-[10px] font-black uppercase text-orange-400 tracking-widest">Early Access</span>
-              <h3 className="text-xl font-extrabold text-white">Join the Pioneer Batch</h3>
+              <h3 className="text-lg sm:text-xl font-extrabold text-white">Join the Pioneer Batch</h3>
               <p className="text-xs text-slate-300 mt-1">
-                Secure your early admission scholarship token. Only 30 slots available per batch schedule.
+                Secure your early admission scholarship token. Only 30 slots available per batch.
               </p>
             </div>
 
             {isSubmitted ? (
-              <div id="success-message" className="bg-emerald-500/10 border border-emerald-500/30 p-6 rounded-2xl text-center space-y-3">
-                <div className="h-12 w-12 bg-emerald-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-xl font-bold shadow-lg shadow-emerald-500/20">
+              <div id="success-message" className="bg-emerald-500/10 border border-emerald-500/30 p-5 rounded-xl text-center space-y-3">
+                <div className="h-10 w-10 bg-emerald-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-lg font-bold">
                   ✓
                 </div>
-                <h4 className="text-sm font-black text-white uppercase tracking-wider">
+                <h4 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
                   Registration Secured Successfully!
                 </h4>
-                <p className="text-xs text-slate-300 leading-relaxed max-w-md mx-auto">
-                  Thank you for choosing E Visionary Solutions India. An industrial technical onboarding blueprint has been dispatched straight to your personal email inbox.
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  An industrial technical onboarding blueprint has been dispatched to your email.
                 </p>
-                <div className="bg-slate-950/80 border border-slate-800 p-4 rounded-xl text-left mt-2 space-y-2">
-                  <span className="text-[9px] uppercase font-bold tracking-widest text-emerald-400 block">
-                    Next Operational Steps:
-                  </span>
-                  <p className="text-[11px] text-slate-300 leading-normal">
-                    • Technical Director <strong className="text-white">Dileep</strong> or Center Coordinators <strong className="text-white">Abhiram or Purna</strong> will message your active WhatsApp line within 24 hours to coordinate your physical laboratory tour layout.<br />
-                    • For direct verification queries or scheduling, contact us anytime at: <a href="mailto:admissions@evisionarysolutionsindia.com" className="text-orange-400 font-bold hover:underline">admissions@evisionarysolutionsindia.com</a>
+                <div className="bg-slate-950/80 border border-slate-800 p-3 sm:p-4 rounded-xl text-left space-y-1.5">
+                  <span className="text-[9px] uppercase font-bold tracking-widest text-emerald-400 block">Next Steps:</span>
+                  <p className="text-[10px] sm:text-[11px] text-slate-300 leading-normal">
+                    • Coordinators will contact your WhatsApp within 24 hours.<br />
+                    • Direct Email: <a href="mailto:admissions@evisionarysolutionsindia.com" className="text-orange-400 font-bold underline">admissions@evisionarysolutionsindia.com</a>
                   </p>
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleFormSubmit} className="space-y-4 relative z-10">
+              <form onSubmit={handleFormSubmit} className="space-y-3.5 relative z-10">
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Full Student Name</label>
                   <input
@@ -370,8 +348,8 @@ export default function App() {
                     name="studentName"
                     value={formData.studentName}
                     onChange={handleInputChange}
-                    placeholder="Enter your name as per certificate"
-                    className={`w-full bg-slate-950/90 border ${formErrors.studentName ? 'border-red-500 focus:border-red-500' : 'border-slate-800 focus:border-orange-500'} rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none transition-all`}
+                    placeholder="Enter your full name"
+                    className={`w-full bg-slate-950/90 border ${formErrors.studentName ? 'border-red-500' : 'border-slate-800'} rounded-xl py-3 px-3.5 text-base sm:text-xs text-white focus:outline-none focus:border-orange-500`}
                   />
                   {formErrors.studentName && <span className="text-[10px] text-red-400 block mt-1">{formErrors.studentName}</span>}
                 </div>
@@ -379,12 +357,12 @@ export default function App() {
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Active WhatsApp Number</label>
                   <input
-                    type="text"
+                    type="tel"
                     name="whatsappNumber"
                     value={formData.whatsappNumber}
                     onChange={handleInputChange}
                     placeholder="10-digit mobile number"
-                    className={`w-full bg-slate-950/90 border ${formErrors.whatsappNumber ? 'border-red-500 focus:border-red-500' : 'border-slate-800 focus:border-orange-500'} rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none transition-all`}
+                    className={`w-full bg-slate-950/90 border ${formErrors.whatsappNumber ? 'border-red-500' : 'border-slate-800'} rounded-xl py-3 px-3.5 text-base sm:text-xs text-white focus:outline-none focus:border-orange-500`}
                   />
                   {formErrors.whatsappNumber && <span className="text-[10px] text-red-400 block mt-1">{formErrors.whatsappNumber}</span>}
                 </div>
@@ -397,30 +375,30 @@ export default function App() {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="name@example.com"
-                    className={`w-full bg-slate-950/90 border ${formErrors.email ? 'border-red-500 focus:border-red-500' : 'border-slate-800 focus:border-orange-500'} rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none transition-all`}
+                    className={`w-full bg-slate-950/90 border ${formErrors.email ? 'border-red-500' : 'border-slate-800'} rounded-xl py-3 px-3.5 text-base sm:text-xs text-white focus:outline-none focus:border-orange-500`}
                   />
                   {formErrors.email && <span className="text-[10px] text-red-400 block mt-1">{formErrors.email}</span>}
                 </div>
 
                 <div>
-                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Educational Background</label>
+                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Educational Qualification</label>
                   <select
                     name="education"
                     value={formData.education}
                     onChange={handleInputChange}
-                    className={`w-full bg-slate-950/90 border ${formErrors.education ? 'border-red-500' : 'border-slate-800'} rounded-xl py-2.5 px-3.5 text-xs text-slate-200 focus:outline-none focus:border-orange-500 transition-all`}
+                    className={`w-full bg-slate-950/90 border ${formErrors.education ? 'border-red-500' : 'border-slate-800'} rounded-xl py-3 px-3.5 text-base sm:text-xs text-slate-200 focus:outline-none focus:border-orange-500`}
                   >
-                    <option value="">Select your qualification</option>
-                    <option value="ITI">ITI (Electrical / Motor Mechanic / Fitter)</option>
-                    <option value="Diploma">Diploma (EEE / ME / ECE / Automobile)</option>
-                    <option value="BTech">B.E. / B.Tech Graduate (Mech, EEE, ECE)</option>
+                    <option value="">Select qualification</option>
+                    <option value="ITI">ITI (Electrical / Mechanic / Fitter)</option>
+                    <option value="Diploma">Diploma (EEE / ME / ECE / Auto)</option>
+                    <option value="BTech">B.E. / B.Tech (Mech, EEE, ECE)</option>
                     <option value="Vocational">Vocational Electrical Streams</option>
                   </select>
                   {formErrors.education && <span className="text-[10px] text-red-400 block mt-1">{formErrors.education}</span>}
                 </div>
 
                 <div>
-                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Preferred Batch Window</label>
+                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Preferred Batch Schedule</label>
                   <div className="grid grid-cols-2 gap-2">
                     {[
                       { value: "morning", label: "Morning (8 AM - 12 PM)" },
@@ -431,7 +409,7 @@ export default function App() {
                         className={`border rounded-xl p-2.5 flex items-center justify-center cursor-pointer text-center transition-all ${
                           formData.preferredBatch === batch.value
                             ? 'border-orange-500 bg-orange-500/10 text-orange-400 font-bold'
-                            : 'border-slate-800 hover:border-slate-700 text-slate-400'
+                            : 'border-slate-800 text-slate-400'
                         }`}
                       >
                         <input
@@ -449,16 +427,16 @@ export default function App() {
                   {formErrors.preferredBatch && <span className="text-[10px] text-red-400 block mt-1">{formErrors.preferredBatch}</span>}
                 </div>
 
-                <label className="flex items-start gap-2 pt-2 cursor-pointer">
+                <label className="flex items-start gap-2 pt-1 cursor-pointer">
                   <input
                     type="checkbox"
                     name="verifiedChecked"
                     checked={formData.verifiedChecked}
                     onChange={handleInputChange}
-                    className="mt-1 accent-orange-500 rounded"
+                    className="mt-0.5 accent-orange-500 h-4 w-4 rounded"
                   />
                   <span className="text-[10px] text-slate-400 leading-tight">
-                    I confirm my genuine interest in joining this EV upskilling program in Anantapur and understand that seats are limited to 30 per batch.
+                    I confirm my genuine interest in joining this EV upskilling program in Anantapur.
                   </span>
                 </label>
                 {formErrors.verifiedChecked && <span className="text-[10px] text-red-400 block mt-1">{formErrors.verifiedChecked}</span>}
@@ -466,44 +444,31 @@ export default function App() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3.5 px-6 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-slate-950 font-black rounded-2xl shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 uppercase tracking-wide flex items-center justify-center gap-2 text-xs cursor-pointer"
+                  className="w-full py-3.5 px-5 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-slate-950 font-black rounded-xl shadow-lg uppercase text-xs cursor-pointer min-h-[44px]"
                 >
-                  {isLoading ? (
-                    <>
-                      <span className="animate-spin h-3.5 w-3.5 border-2 border-slate-950 border-t-transparent rounded-full"></span>
-                      Registering Slot...
-                    </>
-                  ) : (
-                    "Secure My Seat Now"
-                  )}
+                  {isLoading ? "Registering Slot..." : "Secure My Seat Now"}
                 </button>
               </form>
             )}
           </div>
         </section>
 
-        {/* 📋 Employment Vetting Roadmap Section */}
-        <section id="pathways" className="border-t border-slate-800/80 pt-16 space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Employment Vetting Roadmap</span>
-            <h3 className="text-2xl font-black text-white">Careers We Build & Prepare You For</h3>
-            <p className="text-xs text-slate-300">
-              Our intensive laboratory curriculum maps directly to standard industry positions. We prepare candidates to confidently step into professional roles within major commercial Indian EV ecosystem networks:
-            </p>
+        {/* 📋 Career Tracks */}
+        <section id="pathways" className="border-t border-slate-800/80 pt-12 space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-1.5">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Employment Roadmap</span>
+            <h3 className="text-xl sm:text-2xl font-black text-white">Careers We Build & Prepare You For</h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             {careerTracks.map((track, idx) => (
-              <div key={idx} className="bg-slate-900/60 backdrop-blur-sm border border-slate-800 rounded-2xl p-5 space-y-4 hover:border-slate-700 transition-all">
+              <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-3">
                 <h4 className="text-xs font-extrabold text-orange-400 uppercase tracking-wider border-b border-slate-800 pb-2">
                   {track.category}
                 </h4>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {track.roles.map((role, roleIdx) => (
-                    <span 
-                      key={roleIdx} 
-                      className="bg-slate-950/80 text-slate-300 border border-slate-800 text-[10px] font-medium px-2.5 py-1 rounded-md shadow-sm"
-                    >
+                    <span key={roleIdx} className="bg-slate-950/80 text-slate-300 border border-slate-800 text-[10px] font-medium px-2 py-0.5 rounded">
                       {role}
                     </span>
                   ))}
@@ -513,72 +478,61 @@ export default function App() {
           </div>
         </section>
 
-        {/* 🏢 Placement & Corporate Hiring Partners Section */}
-        <section id="partners" className="border-t border-slate-800/80 pt-16 space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-orange-400">Placement Network Ecosystem</span>
-            <h3 className="text-2xl font-black text-white">Target Corporate Placement Pipelines</h3>
-            <p className="text-xs text-slate-300">
-              Our student performance metrics, practical lab grades, and ASDC/NSDC certifications help bridge the technical talent gap for leading entities across the Indian EV industry:
-            </p>
+        {/* 🏢 Hiring Partners */}
+        <section id="partners" className="border-t border-slate-800/80 pt-12 space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-1.5">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-orange-400">Placement Network</span>
+            <h3 className="text-xl sm:text-2xl font-black text-white">Target Placement Companies</h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             {hiringPartners.map((partnerGroup, idx) => (
-              <div key={idx} className="bg-slate-900/60 backdrop-blur-sm border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-orange-500/30 transition-all">
+              <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 sm:p-5 flex flex-col justify-between">
                 <div>
-                  <h4 className="text-[11px] font-black text-white uppercase tracking-widest mb-3 pb-2 border-b border-slate-800 flex items-center gap-2">
+                  <h4 className="text-[11px] font-black text-white uppercase tracking-wider mb-2 pb-2 border-b border-slate-800 flex items-center gap-1.5">
                     <span className="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>
                     {partnerGroup.segment}
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-1.5">
                     {partnerGroup.companies.map((company, companyIdx) => (
-                      <li key={companyIdx} className="flex items-center text-xs text-slate-300 font-medium">
-                        <span className="text-orange-400 mr-2 font-bold">→</span>
+                      <li key={companyIdx} className="flex items-center text-xs text-slate-300">
+                        <span className="text-orange-400 mr-1.5 font-bold">→</span>
                         {company}
                       </li>
                     ))}
                   </ul>
-                </div>
-                <div className="mt-4 pt-3 border-t border-slate-800/60 text-[9px] text-slate-400 font-bold uppercase tracking-wider">
-                  Mapped Placement Target
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 📸 High-Impact Infrastructure & Diagnostic Lab Gallery Block */}
-        <section id="gallery" className="border-t border-slate-800/80 pt-16 space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Inside the Anantapur Center</span>
-            <h3 className="text-2xl font-black text-white">Our Practical Machinery & Rigs</h3>
-            <p className="text-xs text-slate-300">
-              Take a look inside our heavy vehicle maintenance infrastructure and precision diagnostic stations where you will spend 80% of your training course hours.
-            </p>
+        {/* 📸 Lab Gallery */}
+        <section id="gallery" className="border-t border-slate-800/80 pt-12 space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-1.5">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Anantapur Center</span>
+            <h3 className="text-xl sm:text-2xl font-black text-white">Our Practical Rigs</h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             {labGallery.map((item, idx) => (
-              <div key={idx} className="bg-slate-900/60 backdrop-blur-sm border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col group hover:border-orange-500/40 transition-all duration-300">
-                <div className="aspect-video sm:aspect-square w-full bg-slate-950 overflow-hidden relative">
+              <div key={idx} className="bg-slate-900/60 border border-slate-800 rounded-xl overflow-hidden flex flex-col">
+                <div className="aspect-video w-full bg-slate-950 overflow-hidden relative">
                   <img 
                     src={item.src} 
                     alt={`EV Lab Station ${idx + 1}`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
-                  <div className="hidden absolute inset-0 bg-slate-900 items-center justify-center p-4 text-center border-b border-slate-800">
-                    <span className="text-[10px] text-slate-400 uppercase font-bold tracking-widest block">🔧 Lab Station {idx + 1}</span>
+                  <div className="hidden absolute inset-0 bg-slate-900 items-center justify-center p-3 text-center border-b border-slate-800">
+                    <span className="text-[10px] text-slate-400 uppercase font-bold">🔧 Station {idx + 1}</span>
                   </div>
                 </div>
-                <div className="p-3.5 flex-grow bg-slate-900/40">
-                  <p className="text-[11px] text-slate-300 leading-relaxed font-medium">
-                    {item.desc}
-                  </p>
+                <div className="p-3 bg-slate-900/40">
+                  <p className="text-[11px] text-slate-300 font-medium leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -586,13 +540,13 @@ export default function App() {
         </section>
       </main>
 
-      {/* 📄 Footer Section */}
-      <footer className="relative z-10 border-t border-slate-850 bg-[#040810] py-8 px-4 text-center space-y-2">
+      {/* 📄 Footer */}
+      <footer className="relative z-10 border-t border-slate-850 bg-[#040810] py-6 px-4 text-center space-y-1.5">
         <p className="text-[10px] text-slate-400">
-          © {new Date().getFullYear()} M/S <span className="text-orange-400 font-bold">EV</span>ISIONARY SOLUTIONS INDIA. All Rights Reserved. [Regd No: 42 of 2026].
+          © {new Date().getFullYear()} M/S <span className="text-orange-400 font-bold">EV</span>ISIONARY SOLUTIONS INDIA [Regd No: 42 of 2026].
         </p>
-        <p className="text-[9px] text-slate-400 max-w-lg mx-auto">
-          Operational Center: Ramnagar 80ft Road, Near Neru Pragathi Park, Ananthapuramu, AP. All candidate assessments, test scores, and program data are monitored and securely logged to provide vetted manpower solutions to commercial Indian EV manufacturers.
+        <p className="text-[9px] text-slate-500 max-w-md mx-auto">
+          Operational Center: Ramnagar 80ft Road, Near Neru Pragathi Park, Ananthapuramu, AP.
         </p>
       </footer>
     </div>
