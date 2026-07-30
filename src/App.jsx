@@ -170,6 +170,11 @@ export default function App() {
     setActiveAccordion(activeAccordion === index ? null : index);
   };
 
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-[#070E1C] text-slate-100 relative overflow-hidden font-sans selection:bg-orange-500 selection:text-white">
       
@@ -190,16 +195,16 @@ export default function App() {
       {/* 💡 Top Accent Cyber Line */}
       <div className="h-1 w-full bg-gradient-to-r from-cyan-500 via-orange-500 to-blue-600 relative z-50" />
 
-      {/* 🟢 Top Navigation Bar */}
+      {/* 🟢 Top Navigation Bar (Sticky with Smooth Scroll Home Button) */}
       <header className="border-b border-slate-800/80 bg-[#070E1C]/80 backdrop-blur-md sticky top-0 z-50 px-4 py-4 md:px-8">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           
           {/* ⚡ Custom EV Power-Home Brand Block */}
           <div className="flex items-center gap-3 text-center sm:text-left">
-            <a 
-              href="#" 
-              className="p-2 bg-slate-900 border border-slate-700/80 rounded-xl text-orange-400 hover:border-orange-400 hover:bg-orange-500/10 transition-all shadow-md group"
-              title="Home Base"
+            <button 
+              onClick={scrollToTop}
+              className="p-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-orange-400 hover:border-orange-400 hover:bg-orange-500/20 active:scale-95 transition-all shadow-md group cursor-pointer"
+              title="Return to Top"
             >
               <svg 
                 className="h-5 w-5 transition-transform group-hover:scale-110" 
@@ -213,10 +218,11 @@ export default function App() {
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                 <path d="M13 7.5l-3.5 4.5h3.5l-1 5.5 3.5-4.5h-3.5z" fill="currentColor" className="text-orange-400" />
               </svg>
-            </a>
+            </button>
             <div>
+              {/* 🎨 "EV" Highlighted Brand Heading */}
               <h1 className="text-lg font-black tracking-tight text-white uppercase">
-                EVISIONARY SOLUTIONS INDIA
+                <span className="text-orange-400 drop-shadow-[0_0_12px_rgba(249,115,22,0.8)]">EV</span>ISIONARY SOLUTIONS INDIA
               </h1>
               <div className="flex items-center gap-2">
                 <span className="text-[10px] text-orange-400 font-bold tracking-widest uppercase">
@@ -247,10 +253,11 @@ export default function App() {
             India's EV Technical Capital Launching in Anantapur
           </div>
           
+          {/* 🎯 Updated Heading with Placement Highlight */}
           <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
             Power India's EV Future. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-cyan-400">
-              Get Certified in 60 Days.
+              Get Certified and Placed in 60 Days.
             </span>
           </h2>
           
@@ -446,7 +453,7 @@ export default function App() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3.5 px-6 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-slate-950 font-black rounded-2xl shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 uppercase tracking-wide flex items-center justify-center gap-2 text-xs"
+                  className="w-full py-3.5 px-6 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-slate-950 font-black rounded-2xl shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 uppercase tracking-wide flex items-center justify-center gap-2 text-xs cursor-pointer"
                 >
                   {isLoading ? (
                     <>
@@ -569,7 +576,7 @@ export default function App() {
       {/* 📄 Footer Section */}
       <footer className="relative z-10 border-t border-slate-850 bg-[#040810] py-8 px-4 text-center space-y-2">
         <p className="text-[10px] text-slate-400">
-          © {new Date().getFullYear()} M/S EVISIONARY SOLUTIONS INDIA. All Rights Reserved. [Regd No: 42 of 2026].
+          © {new Date().getFullYear()} M/S <span className="text-orange-400 font-bold">EV</span>ISIONARY SOLUTIONS INDIA. All Rights Reserved. [Regd No: 42 of 2026].
         </p>
         <p className="text-[9px] text-slate-400 max-w-lg mx-auto">
           Operational Center: Ramnagar 80ft Road, Near Neru Pragathi Park, Ananthapuramu, AP. All candidate assessments, test scores, and program data are monitored and securely logged to provide vetted manpower solutions to commercial Indian EV manufacturers.
