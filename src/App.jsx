@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import AboutUs from './components/AboutUs'; // 👈 Import AboutUs component
 
 export default function App() {
+  // Navigation View State ('home' or 'about')
+  const [currentView, setCurrentView] = useState('home');
+
   // Form State
   const [formData, setFormData] = useState({
     studentName: '',
@@ -169,9 +173,17 @@ export default function App() {
   };
 
   const scrollToTop = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
+    if (currentView !== 'home') {
+      setCurrentView('home');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // 🔄 Render About Us Page View if triggered
+  if (currentView === 'about') {
+    return <AboutUs onNavigateBack={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />;
+  }
 
   return (
     <div className="min-h-screen bg-[#070E1C] text-slate-100 relative overflow-x-hidden font-sans selection:bg-orange-500 selection:text-white">
@@ -190,9 +202,8 @@ export default function App() {
         }}
       />
 
-      {/* 🟢 FIXED Top Navigation Bar (Stays Pinned On Scroll) */}
+      {/* 🟢 FIXED Top Navigation Bar */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-800/80 bg-[#070E1C]/90 backdrop-blur-md px-4 py-3 md:px-8 shadow-xl">
-        {/* 💡 Top Accent Cyber Line */}
         <div className="h-1 w-full bg-gradient-to-r from-cyan-500 via-orange-500 to-blue-600 absolute top-0 left-0 right-0" />
 
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3 pt-1">
@@ -203,7 +214,7 @@ export default function App() {
               onClick={scrollToTop}
               type="button"
               className="p-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-orange-400 hover:border-orange-400 hover:bg-orange-500/20 active:scale-95 transition-all shadow-md group cursor-pointer flex-shrink-0"
-              title="Return to Top"
+              title="Return to Home / Top"
             >
               <svg 
                 className="h-5 w-5 transition-transform group-hover:scale-110" 
@@ -219,8 +230,7 @@ export default function App() {
               </svg>
             </button>
             <div>
-              {/* 🎨 "EV" Highlighted Brand Heading */}
-              <h1 className="text-lg font-black tracking-tight text-white uppercase">
+              <h1 className="text-lg font-black tracking-tight text-white uppercase cursor-pointer" onClick={scrollToTop}>
                 <span className="text-orange-400 drop-shadow-[0_0_12px_rgba(249,115,22,0.8)]">EV</span>ISIONARY SOLUTIONS INDIA
               </h1>
               <div className="flex items-center gap-2">
@@ -234,7 +244,14 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex gap-4 text-xs font-semibold">
+          {/* 🔗 Navigation Links */}
+          <div className="flex gap-4 text-xs font-semibold items-center">
+            <button 
+              onClick={() => setCurrentView('about')} 
+              className="text-orange-400 font-extrabold hover:text-orange-300 transition-colors cursor-pointer bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-lg"
+            >
+              About Us
+            </button>
             <a href="#curriculum" className="text-slate-300 hover:text-orange-400 transition-colors">Outline</a>
             <a href="#pathways" className="text-slate-300 hover:text-orange-400 transition-colors">Careers</a>
             <a href="#partners" className="text-slate-300 hover:text-orange-400 transition-colors">Hiring Network</a>
@@ -244,7 +261,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* ⚡ Hero Section (Added Padding Top to prevent overlap with fixed navbar) */}
+      {/* ⚡ Hero Section */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 pt-32 md:pt-36 pb-12 md:pb-20 space-y-20">
         <section className="text-center space-y-6 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-full text-xs text-orange-400 font-semibold shadow-inner">
@@ -252,7 +269,6 @@ export default function App() {
             India's EV Technical Capital Launching in Anantapur
           </div>
           
-          {/* 🎯 Updated Heading with Placement Highlight */}
           <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
             Power India's EV Future. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-cyan-400">
@@ -312,9 +328,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* 📝 Short Registration Form Container */}
+          {/* 📝 Registration Form Container */}
           <div id="apply" className="bg-slate-900/90 backdrop-blur-md border border-orange-500/20 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl shadow-black/80 relative">
-            
             <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl pointer-events-none" />
 
             <div className="text-center lg:text-left relative z-10">
@@ -325,7 +340,6 @@ export default function App() {
               </p>
             </div>
 
-            {/* 🔄 Post-Registration Operational Success Block */}
             {isSubmitted ? (
               <div id="success-message" className="bg-emerald-500/10 border border-emerald-500/30 p-6 rounded-2xl text-center space-y-3">
                 <div className="h-12 w-12 bg-emerald-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-xl font-bold shadow-lg shadow-emerald-500/20">
