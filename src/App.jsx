@@ -79,8 +79,7 @@ export default function App() {
     { src: "/images/photo6.png", desc: "Diagnostic tracking on dual-stage motor control units and high-current shielded power lines." },
     { src: "/images/photo7.png", desc: "Troubleshooting heavy-vehicle pneumatic air systems and auxiliary thermal cooling radiators." },
     { src: "/images/photo8.png", desc: "Exploring complex copper-tubed battery thermal management systems and climate control filtration rigs." },
-    { src: "/images/photo9.png", desc: "Wiring and load-testing auxiliary battery systems alongside commercial maxi-fuse distribution panels." },
-    { src: "/images/photo10.png", desc: "Mapping advanced high-voltage distribution units (PDUs) across commercial electric bus platforms." }
+  
   ];
 
   // Form Validation Logic
