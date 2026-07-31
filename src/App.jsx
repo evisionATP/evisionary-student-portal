@@ -142,7 +142,9 @@ export default function App() {
       };
 
       try {
-        await fetch(import.meta.env.VITE_API_URL, {
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9SUpoC4SfqaLnkcz_SsBCYrM4185hkJLrHCLc2aYS3dnlyokhbrH4s0RpLjP_DM4LNQ/exec";
+
+        await fetch(SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: {
