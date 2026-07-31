@@ -9,6 +9,7 @@ export default function App() {
     whatsappNumber: '',
     email: '',
     education: '',
+    preferredMode: 'offline',
     preferredBatch: '',
     verifiedChecked: false
   });
@@ -136,7 +137,7 @@ export default function App() {
         fullName: formData.studentName,
         email: formData.email.trim(),
         phone: formData.whatsappNumber,
-        course: `EV Program (${formData.preferredBatch.toUpperCase()})`,
+        course: `EV Program (${formData.preferredMode.toUpperCase()} - ${formData.preferredBatch.toUpperCase()})`,
         experience: formData.education
       };
 
@@ -221,7 +222,7 @@ export default function App() {
             </div>
 
             <a href="#apply" className="sm:hidden bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 px-3 py-1 rounded-md font-black text-[10px] uppercase shadow-md whitespace-nowrap">
-              Apply
+              Reserve Seat
             </a>
           </div>
 
@@ -244,9 +245,10 @@ export default function App() {
       {/* ⚡ Hero Section */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 pt-28 sm:pt-36 pb-12 sm:pb-20 space-y-16 sm:space-y-20">
         <section className="text-center space-y-4 sm:space-y-6 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 bg-orange-500/10 border border-orange-500/30 px-2.5 py-1 rounded-full text-[10px] sm:text-xs text-orange-400 font-semibold shadow-inner">
-            <span className="h-2 w-2 rounded-full bg-orange-400 animate-pulse"></span>
-            India's EV Technical Capital Launching in Anantapur
+          {/* 🎓 Highlighted Mode Availability */}
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500/15 via-amber-500/15 to-cyan-500/15 border border-orange-500/40 px-3.5 py-1.5 rounded-full text-xs text-white font-semibold shadow-inner">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Available in <strong className="text-orange-400">Offline (Anantapur Lab)</strong> & <strong className="text-cyan-400">Live Online</strong> Modes</span>
           </div>
           
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
@@ -262,9 +264,9 @@ export default function App() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 pt-4 text-left">
             {[
-              { label: "Course Duration", value: "60 Days (Intensive)" },
-              { label: "Lab Location", value: "Anantapur, AP" },
-              { label: "Launch Seats", value: "30 Available / Batch" },
+              { label: "Training Mode", value: "Offline Lab & Online Live" },
+              { label: "First Batch Special", value: "₹14,999/- Only" },
+              { label: "Pioneer Slots", value: "30 Seats Available" },
               { label: "Fee Option", value: "Easy 2-Part Installments" }
             ].map((m, idx) => (
               <div key={idx} className="bg-slate-900/60 backdrop-blur-sm border border-slate-800 p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg">
@@ -279,7 +281,7 @@ export default function App() {
         <section id="curriculum" className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
           <div className="space-y-4 sm:space-y-6">
             <div>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Classroom Setup</span>
+              <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Classroom & Lab Setup</span>
               <h3 className="text-xl sm:text-2xl font-black text-white mt-1">What You Will Master</h3>
               <p className="text-xs text-slate-300 mt-1">
                 Our syllabus matches hiring criteria established by leading Indian OEMs, battery manufacturers, and fleet operators.
@@ -311,10 +313,31 @@ export default function App() {
           {/* 📝 Registration Form Container */}
           <div id="apply" className="bg-slate-900/90 backdrop-blur-md border border-orange-500/20 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-5 shadow-2xl relative">
             <div className="text-center lg:text-left relative z-10">
-              <span className="text-[10px] font-black uppercase text-orange-400 tracking-widest">Early Access</span>
+              <span className="text-[10px] font-black uppercase text-orange-400 tracking-widest">Pioneer Enrollment</span>
               <h3 className="text-lg sm:text-xl font-extrabold text-white">Join the Pioneer Batch</h3>
-              <p className="text-xs text-slate-300 mt-1">
-                Secure your early admission scholarship token. Only 30 slots available per batch.
+              <p className="text-xs text-slate-300 mt-0.5">
+                Reserve your seat for the upcoming launch batch in Anantapur or Online.
+              </p>
+            </div>
+
+            {/* 🏷️ SPECIAL FIRST BATCH PRICING PROMO CARD */}
+            <div className="bg-gradient-to-r from-orange-500/20 via-amber-500/10 to-emerald-500/20 border border-orange-500/40 rounded-xl p-3.5 sm:p-4 text-center space-y-1 shadow-lg">
+              <span className="text-[10px] font-black uppercase text-orange-400 tracking-wider block">
+                🔥 First Batch Exclusive Inaugural Offer
+              </span>
+              <div className="flex items-center justify-center gap-2 pt-0.5">
+                <span className="text-sm sm:text-base text-slate-400 line-through font-bold decoration-red-500 decoration-2">
+                  ₹29,999/-
+                </span>
+                <span className="text-2xl sm:text-3xl font-black text-emerald-400 drop-shadow-[0_0_12px_rgba(52,211,153,0.5)]">
+                  ₹14,999/-
+                </span>
+                <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[9px] font-black px-2 py-0.5 rounded-md uppercase">
+                  50% OFF
+                </span>
+              </div>
+              <p className="text-[10px] text-slate-300 font-medium">
+                Flat 50% waiver applied for the first 30 students only. Reserve your slot today!
               </p>
             </div>
 
@@ -395,6 +418,36 @@ export default function App() {
                   {formErrors.education && <span className="text-[10px] text-red-400 block mt-1">{formErrors.education}</span>}
                 </div>
 
+                {/* 📍 PREFERRED TRAINING MODE SELECTOR */}
+                <div>
+                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Preferred Learning Mode</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { value: "offline", label: "Offline (Anantapur Lab)" },
+                      { value: "online", label: "Live Online Classes" }
+                    ].map((mode) => (
+                      <label
+                        key={mode.value}
+                        className={`border rounded-xl p-2.5 flex items-center justify-center cursor-pointer text-center transition-all ${
+                          formData.preferredMode === mode.value
+                            ? 'border-cyan-400 bg-cyan-500/10 text-cyan-300 font-bold'
+                            : 'border-slate-800 text-slate-400'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="preferredMode"
+                          value={mode.value}
+                          checked={formData.preferredMode === mode.value}
+                          onChange={handleInputChange}
+                          className="hidden"
+                        />
+                        <span className="text-[10px]">{mode.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Preferred Batch Schedule</label>
                   <div className="grid grid-cols-2 gap-2">
@@ -434,7 +487,7 @@ export default function App() {
                     className="mt-0.5 accent-orange-500 h-4 w-4 rounded"
                   />
                   <span className="text-[10px] text-slate-400 leading-tight">
-                    I confirm my genuine interest in joining this EV upskilling program in Anantapur.
+                    I confirm my genuine interest in reserving a Pioneer Batch seat for ₹14,999/-.
                   </span>
                 </label>
                 {formErrors.verifiedChecked && <span className="text-[10px] text-red-400 block mt-1">{formErrors.verifiedChecked}</span>}
@@ -444,7 +497,7 @@ export default function App() {
                   disabled={isLoading}
                   className="w-full py-3.5 px-5 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-slate-950 font-black rounded-xl shadow-lg uppercase text-xs cursor-pointer min-h-[44px]"
                 >
-                  {isLoading ? "Registering Slot..." : "Secure My Seat Now"}
+                  {isLoading ? "Reserving Slot..." : "Reserve My Seat @ ₹14,999/-"}
                 </button>
               </form>
             )}
@@ -558,7 +611,7 @@ export default function App() {
 
       {/* 💬 FLOATING WHATSAPP QUICK-CHAT BUTTON */}
       <a 
-        href="https://wa.me/917899474996?text=Hi%20E%20Visionary%20Solutions,%20I%20want%20to%20know%20more%20about%20the%20EV%20training%20program." 
+        href="https://wa.me/917899474996?text=Hi%20E%20Visionary%20Solutions,%20I%20want%20to%20reserve%20a%20seat%20for%20the%20first%20batch%20at%2014,999/-" 
         target="_blank" 
         rel="noopener noreferrer"
         className="fixed bottom-5 right-5 z-50 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white p-3.5 rounded-full shadow-2xl shadow-emerald-500/50 flex items-center justify-center transition-all duration-300 group"
