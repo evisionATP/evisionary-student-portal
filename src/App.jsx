@@ -133,19 +133,22 @@ export default function App() {
     if (validateForm()) {
       setIsLoading(true);
 
-      // Convert payload into standard form-encoded data for Google Apps Script
-      const formPayload = new URLSearchParams();
-      formPayload.append('fullName', formData.studentName);
-      formPayload.append('email', formData.email.trim());
-      formPayload.append('phone', formData.whatsappNumber);
-      formPayload.append('course', `EV Program (${formData.preferredMode.toUpperCase()} - ${formData.preferredBatch.toUpperCase()})`);
-      formPayload.append('experience', formData.education);
+      const payload = {
+        fullName: formData.studentName,
+        email: formData.email.trim(),
+        phone: formData.whatsappNumber,
+        course: `EV Program (${formData.preferredMode.toUpperCase()} - ${formData.preferredBatch.toUpperCase()})`,
+        experience: formData.education
+      };
 
       try {
         await fetch(import.meta.env.VITE_API_URL, {
           method: 'POST',
           mode: 'no-cors',
-          body: formPayload,
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          },
+          body: JSON.stringify(payload),
         });
 
         setIsSubmitted(true);
