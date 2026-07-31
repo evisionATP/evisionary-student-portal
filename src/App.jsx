@@ -558,7 +558,7 @@ export default function App() {
 
       {/* 💬 FLOATING WHATSAPP QUICK-CHAT BUTTON */}
       <a 
-        href="https://wa.me/917013311533?text=Hi%20E%20Visionary%20Solutions,%20I%20want%20to%20know%20more%20about%20the%20EV%20training%20program." 
+        href="https://wa.me/917899474996?text=Hi%20E%20Visionary%20Solutions,%20I%20want%20to%20know%20more%20about%20the%20EV%20training%20program." 
         target="_blank" 
         rel="noopener noreferrer"
         className="fixed bottom-5 right-5 z-50 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white p-3.5 rounded-full shadow-2xl shadow-emerald-500/50 flex items-center justify-center transition-all duration-300 group"
