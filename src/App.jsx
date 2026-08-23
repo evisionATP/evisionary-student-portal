@@ -267,7 +267,7 @@ export default function App() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 pt-4 text-left">
             {[
               { label: "Training Mode", value: "Offline Lab & Online Live" },
-              { label: "First Batch Special", value: "₹14,999/- Only" },
+              { label: "First Batch Special", value: "₹20,000/- Only" },
               { label: "Pioneer Slots", value: "30 Seats Available" },
               { label: "Fee Option", value: "Easy 2-Part Installments" }
             ].map((m, idx) => (
@@ -329,10 +329,10 @@ export default function App() {
               </span>
               <div className="flex items-center justify-center gap-2 pt-0.5">
                 <span className="text-sm sm:text-base text-slate-400 line-through font-bold decoration-red-500 decoration-2">
-                  ₹29,999/-
+                  ₹40,000/-
                 </span>
                 <span className="text-2xl sm:text-3xl font-black text-emerald-400 drop-shadow-[0_0_12px_rgba(52,211,153,0.5)]">
-                  ₹14,999/-
+                  ₹20,000/-
                 </span>
                 <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[9px] font-black px-2 py-0.5 rounded-md uppercase">
                   50% OFF
@@ -489,7 +489,7 @@ export default function App() {
                     className="mt-0.5 accent-orange-500 h-4 w-4 rounded"
                   />
                   <span className="text-[10px] text-slate-400 leading-tight">
-                    I confirm my genuine interest in reserving a Pioneer Batch seat for ₹14,999/-.
+                    I confirm my genuine interest in reserving a Pioneer Batch seat for ₹20,000/-.
                   </span>
                 </label>
                 {formErrors.verifiedChecked && <span className="text-[10px] text-red-400 block mt-1">{formErrors.verifiedChecked}</span>}
@@ -499,7 +499,7 @@ export default function App() {
                   disabled={isLoading}
                   className="w-full py-3.5 px-5 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-slate-950 font-black rounded-xl shadow-lg uppercase text-xs cursor-pointer min-h-[44px]"
                 >
-                  {isLoading ? "Reserving Slot..." : "Reserve My Seat @ ₹14,999/-"}
+                  {isLoading ? "Reserving Slot..." : "Reserve My Seat @ ₹20,000/-"}
                 </button>
               </form>
             )}
@@ -613,7 +613,7 @@ export default function App() {
 
       {/* 💬 FLOATING WHATSAPP QUICK-CHAT BUTTON */}
       <a 
-        href="https://wa.me/917899474996?text=Hi%20E%20Visionary%20Solutions,%20I%20want%20to%20reserve%20a%20seat%20for%20the%20first%20batch%20at%2014,999/-" 
+        href="https://wa.me/917899474996?text=Hi%20EVisionary%20Solutions,%20I%20want%20to%20reserve%20a%20seat%20for%20the%20first%20batch%20at%2020,000/-" 
         target="_blank" 
         rel="noopener noreferrer"
         className="fixed bottom-5 right-5 z-50 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white p-3.5 rounded-full shadow-2xl shadow-emerald-500/50 flex items-center justify-center transition-all duration-300 group"
