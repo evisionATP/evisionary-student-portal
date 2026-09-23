@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AboutUs from './components/AboutUs';
 
 export default function App() {
@@ -18,6 +18,38 @@ export default function App() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // 🎯 Initialize Meta Pixel on Page Load
+  useEffect(() => {
+    if (!window.fbq) {
+      (function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        'script',
+        'https://connect.facebook.net/en_US/fbevents.js'
+      );
+
+      window.fbq('init', '29616716044585384');
+    }
+    window.fbq('track', 'PageView');
+  }, []);
 
   const syllabusDays = [
     {
@@ -154,6 +186,15 @@ export default function App() {
         });
 
         setIsSubmitted(true);
+
+        // 🎯 Track Successful Lead in Meta Ads
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', 'Lead', {
+            content_name: 'Pioneer Batch Seat Reservation',
+            value: 20000,
+            currency: 'INR'
+          });
+        }
       } catch (error) {
         console.error('Submission error:', error);
         alert('❌ Network connection error. Please try again.');
