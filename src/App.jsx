@@ -14,7 +14,7 @@ export default function App() {
     verifiedChecked: false
   });
 
-  const [activeAccordion, setActiveAccordion] = useState(null);
+  const [activeAccordion, setActiveAccordion] = useState(0);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,37 +51,125 @@ export default function App() {
     window.fbq('track', 'PageView');
   }, []);
 
-  const syllabusDays = [
+  const curriculumModules = [
     {
-      title: "Phase 1: High-Voltage Safety & Tools (Days 1–10)",
-      content: "Introduction to high-voltage automotive platforms. Standard Operating Procedures (SOPs) for safety, emergency shutoff loops, insulation rating, and donning certified Class 0 glove gear."
+      moduleNumber: "Module 01",
+      title: "EV Architecture, Vehicle Dynamics & MATLAB/Simulink Sizing",
+      tools: "MATLAB, Simulink, Powertrain Blockset",
+      badge: "Software & Sizing",
+      description: "Mathematical modeling of EV dynamics, tractive effort equations, component sizing, and drive-cycle simulations.",
+      topics: [
+        "EV Fundamentals & Vehicle Dynamics: Governing mechanical equations, roll resistance, aerodynamic drag, and gradeability calculations.",
+        "Component Sizing: Sizing battery packs (kWh), traction inverters, DC-DC buck/boost converters, and onboard chargers (OBC).",
+        "MATLAB & Simulink Simulation: Simulating drive cycles (WLTP, FTP75, Indian Drive Cycle), motor load curves, and efficiency maps.",
+        "High-voltage vehicle harness routing, contactor sequencing, and auxiliary 12V DC-DC system simulation."
+      ]
     },
     {
-      title: "Phase 2: Battery Chemistries & BMS Diagnostics (Days 11–25)",
-      content: "Lithium-ion vs. LFP cell architectures. Hands-on thermal runaways mitigation, CAN bus logging, state-of-charge (SoC) calibration, and manual cell balancing on active BMS diagnostic rigs."
+      moduleNumber: "Module 02",
+      title: "Advanced Battery Technology, Pack Engineering & Active BMS Diagnostics",
+      tools: "MATLAB Simscape, Active BMS Hardware Rigs, Thermal Loggers",
+      badge: "Cell to Pack Hardware",
+      description: "Deep dive into Lithium-ion chemistries, thermal runaway prevention, CAN bus battery logging, and physical pack assembly.",
+      topics: [
+        "Chemistries: LFP (Lithium Iron Phosphate), NMC, NCA, and next-generation Solid-State battery cells.",
+        "Pack Engineering: Module architecture, busbar welding standards, pre-charge resistor sizing, and safety interlocks.",
+        "Battery Thermal Management Systems (BTMS): Phase-change materials, liquid cooling jacket loops, and thermal runaway containment.",
+        "BMS Diagnostics & Protocols: Real-time SoC/SoH estimation, active vs. passive cell balancing, CCCV charging curves, and CAN bus telemetry."
+      ]
     },
     {
-      title: "Phase 3: Motor Powertrains & Controller Tuning (Days 26–35)",
-      content: "BLDC and PMSM motor diagnostics. Wiring, troubleshooting rotor angle sensors, tracking controller phase currents, and resolving drive-cycle error logs."
+      moduleNumber: "Module 03",
+      title: "Electric Traction Motors, Vector Control (FOC/DTC) & Power Inverters",
+      tools: "Vector Control Rigs, PMSM Simulation benches, Power Analyzers",
+      badge: "Powertrain Core",
+      description: "Mastering Permanent Magnet Synchronous Motors (PMSM), Induction Motors, and field-oriented inverter controller tuning.",
+      topics: [
+        "Traction Topology: Design and operation of BLDC, PMSM, and PMaSynRM (Outer Rotor High Torque) traction systems.",
+        "Vector Control & Inverter Tuning: Direct Torque Control (DTC) and Field-Oriented Control (FOC) using rotor angle sensors (Resolvers/Encoders).",
+        "Regenerative Braking Systems: Braking energy recapture algorithms, converter phase-current tracking, and MOSFET/IGBT gate driver loops.",
+        "Failure Diagnostics: Resolving motor stator phase faults, controller over-temperature alarms, and OEM benchmark teardowns (Toyota Prius / MG EV)."
+      ]
     },
     {
-      title: "Phase 4: EV Charging Systems & Fleet Integration (Days 36–45)",
-      content: "AC vs. DC fast charging protocols. Troubleshooting gun locking systems, charging station earth leakage detection, and final vehicle live-fault diagnostics on salvaged EVs."
+      moduleNumber: "Module 04",
+      title: "Heavy Mechanical Workshop: Turbo Engines, Transmissions & Axles",
+      tools: "Industrial Engine Benches, Hydraulic Press, Torque Calibrators",
+      badge: "Heavy Mechanical Core",
+      description: "Complete hands-on overhaul and structural calibration of heavy-duty mechanical automotive subsystems.",
+      topics: [
+        "Turbocharged Engine Assembly: Turbocharger vane inspection, intercooler efficiency loops, cylinder head torquing, and oil feed line servicing.",
+        "Gearbox & Transmission Systems: Multi-speed manual/automatic reduction gearboxes, sync-ring replacement, and planetary gear sets.",
+        "Axle Assemblies: Front steering knuckle geometry, kingpins, rear live drive axles, differential carrier gear backlash, and crown-pinion setup.",
+        "Heavy Chassis Suspension & Brakes: Air-brake pneumatic circuitry, steering linkages, hub bearing press-fitting, and load dynamics."
+      ]
+    },
+    {
+      moduleNumber: "Module 05",
+      title: "Autonomous Driving Systems (ADAS), Perception & Computer Vision",
+      tools: "Python, OpenCV, CARLA Simulator, ROS (Robot Operating System)",
+      badge: "Autonomous Systems",
+      description: "Build ADAS algorithms and test autonomy sensor stacks on physical vision rigs and simulation testbeds.",
+      topics: [
+        "ADAS Architectures: SAE Autonomy Levels (Level 1 to Level 5) and sensor suite integration (Cameras, Radar, LiDAR, Ultrasonic).",
+        "Computer Vision with Python & OpenCV: Edge detection (Canny), Hough line lane-detection transforms, and stereo depth estimation.",
+        "ADAS Safety Features: Implementation of Automatic Emergency Braking (AEB), Forward Collision Warning (FCW), Blind Spot Detection, and Lane Keep Assist.",
+        "Hardware-in-the-Loop Simulation: Running CARLA autonomous test tracks and sensor fusion algorithms using Artificial Neural Networks (ANN/CNN)."
+      ]
+    },
+    {
+      moduleNumber: "Module 06",
+      title: "Connected Vehicles (V2X), Automotive Embedded Systems & HIL Testing",
+      tools: "STM32CubeIDE, FreeRTOS, PeakCAN, CANoe, Wireshark, dSPACE",
+      badge: "Embedded & IoT",
+      description: "Automotive ECU firmware development, real-time operating systems, vehicle networking, and cyber resilience.",
+      topics: [
+        "Automotive Embedded Architectures: Microcontrollers (STM32, ARM Cortex-M), timers, ADC, interrupt handling, and RTOS task scheduling.",
+        "Connected Car & V2X: Vehicle-to-Vehicle (V2V), Vehicle-to-Infrastructure (V2I), IoT telematics gateways, GPS tracking, and Fastag protocols.",
+        "Automotive Protocols & HIL: CAN, LIN, Ethernet, and dSPACE / CANoe hardware-in-the-loop diagnostic logging.",
+        "Automotive Cybersecurity: Secure bootloaders, CAN injection attack mitigation, SSL/TLS vehicular communication, and penetration testing."
+      ]
+    },
+    {
+      moduleNumber: "Module 07",
+      title: "Applied AI & Machine Learning in Automotive Systems",
+      tools: "TensorFlow, Scikit-Learn, Edge-AI Accelerator Kits",
+      badge: "Industrial AI",
+      description: "Deploy machine learning for real-time battery degradation alerts, vehicle predictive maintenance, and conversational cabin AI.",
+      topics: [
+        "Predictive Maintenance: ML algorithms analyzing sensor telemetry to forecast motor bearing wear, brake pad life, and battery thermal health.",
+        "EV Energy Optimization: AI-driven range prediction taking into account topology, driver habits, climate control, and route conditions.",
+        "Cabin AI: Natural Language Processing (NLP) voice assistants, driver drowsiness detection cameras, and cabin personalization.",
+        "Manufacturing AI: Robotic vision inspection for automated weld-joint defect detection and intelligent factory supply-chain scheduling."
+      ]
+    },
+    {
+      moduleNumber: "Module 08",
+      title: "Final-Year B.Tech & Diploma Academic Capstone & Custom Prototyping Hub",
+      tools: "3D CAD, Custom CNC, PCB Fabrication, Dyno Test Bench",
+      badge: "Major / Minor Project & Patenting",
+      description: "End-to-end prototype development for academic submissions, national competitions, and commercial startup patents.",
+      topics: [
+        "Custom EV Conversions: Converting standard 2-wheelers or custom chassis to high-efficiency PMSM electric drive systems.",
+        "Smart BMS & Telematics Prototypes: Custom PCB layout design, IoT cloud-connected tracking, and lithium pack fabrication from scratch.",
+        "Autonomous Mobile Robots (AMRs): Camera/LiDAR driven delivery bots, obstacle-avoiding rovers, and sensor fusion demonstration rigs.",
+        "Full Documentation Support: Complete circuit schematics, CAD designs, simulation source code, project synopsis, IEEE-format reports, and viva preparation."
+      ]
     }
   ];
 
   const careerTracks = [
     {
-      category: "Engineering & Management Leadership",
-      roles: ["Head Service", "Service Manager", "Service Engineer", "Shift Incharge / Supervisor", "Service Trainee"]
+      category: "Engineering & R&D Leadership",
+      roles: ["EV Powertrain Engineer", "BMS Calibration Engineer", "ADAS Software Developer", "Embedded Firmware Engineer", "Vehicle Dynamics Specialist"]
     },
     {
-      category: "Technical & Electrical Workshop Operations",
-      roles: ["Senior Electrician", "Electrician", "Helper Electrician / E-Helper", "Senior Mechanic", "Mechanic", "Helper Technician", "Denter", "Painter", "Tyre Supervisor", "Tyreman / Tyre Technician"]
+      category: "Heavy Mechanical & Workshop Operations",
+      roles: ["Turbo Engine Specialist", "Transmission & Gearbox Technician", "Differential & Axle Overhaul Lead", "Chassis & Suspension Inspector", "Senior Automotive Electrician"]
     },
     {
-      category: "Logistics, Admin & Fleet Operations",
-      roles: ["DBM Operator / MIS", "Store Manager / Store Incharge", "Store Executive / Store Picker", "Admin / Accounts"]
+      category: "Academic & Prototyping R&D",
+      roles: ["Prototype Build Specialist", "Testing & Calibration Trainee", "Robotics & IoT Integrator", "Fleet Maintenance Supervisor"]
     }
   ];
 
@@ -91,24 +179,24 @@ export default function App() {
       companies: ["Olectra Greentech", "JBM Auto", "Tata Motors Commercial", "Switch Mobility (Ashok Leyland)", "Euler Motors", "Altigreen"]
     },
     {
-      segment: "EV Fleet Operators & Logistics Networks",
+      segment: "EV Fleet Operators & Mobility Networks",
       companies: ["BluSmart Mobility", "MoEVing Cargo", "Zypp Electric", "Lithium Urban Technologies"]
     },
     {
-      segment: "Battery Chemistries & Infrastructure Partners",
-      companies: ["Amara Raja Energy & Mobility", "Exide Energy Solutions", "Log9 Materials", "Lohum Cleantech"]
+      segment: "Battery & Heavy Mechanical Engineering",
+      companies: ["Amara Raja Energy & Mobility", "Exide Energy", "Bosch India", "Lohum Cleantech", "Log9 Materials"]
     }
   ];
 
   const labGallery = [
-    { src: "/images/photo1.png", desc: "Full-scale commercial EV heavy vehicle lift bays for hands-on under-chassis fleet troubleshooting." },
-    { src: "/images/photo2.png", desc: "Smart interactive digital lab setups for tracking real-time CAN bus telemetry and BMS analytics." },
-    { src: "/images/photo3.png", desc: "Deep look into structural suspension steering linkages integrated alongside high-voltage powertrain loops." },
-    { src: "/images/photo4.png", desc: "Hands-on calibration of barcode-tracked diagnostic harnesses and automated sensor blocks." },
-    { src: "/images/photo5.png", desc: "Mastering drive-axle configurations and high-torque electric motor power interfaces." },
-    { src: "/images/photo6.png", desc: "Diagnostic tracking on dual-stage motor control units and high-current shielded power lines." },
-    { src: "/images/photo7.png", desc: "Troubleshooting heavy-vehicle pneumatic air systems and auxiliary thermal cooling radiators." },
-    { src: "/images/photo8.png", desc: "Exploring complex copper-tubed battery thermal management systems and climate control filtration rigs." },
+    { src: "/images/photo1.png", desc: "Full-scale commercial vehicle hydraulic lift bays for heavy under-chassis, transmission, and axle overhauls." },
+    { src: "/images/photo2.png", desc: "Interactive digital lab stations running MATLAB/Simulink dynamics and live CAN bus bus-monitoring software." },
+    { src: "/images/photo3.png", desc: "Mechanical steering linkages, differential gearboxes, and suspension components alongside high-voltage powertrains." },
+    { src: "/images/photo4.png", desc: "Custom prototype workbench equipped for battery pack fabrication, spot welding, and BMS firmware flashing." },
+    { src: "/images/photo5.png", desc: "Live dyno rigs for testing high-torque PMSM and BLDC traction motors under variable road resistance loads." },
+    { src: "/images/photo6.png", desc: "Automotive embedded testing setups utilizing STM32 microcontrollers, CANalyzers, and sensor suites." },
+    { src: "/images/photo7.png", desc: "Turbocharged IC engine test stand for studying intake boost pressure, intercoolers, and auxiliary cooling loops." },
+    { src: "/images/photo8.png", desc: "High-voltage battery thermal management modules with multi-channel temperature data loggers." },
   ];
 
   const validateForm = () => {
@@ -169,7 +257,7 @@ export default function App() {
         fullName: formData.studentName,
         email: formData.email.trim(),
         phone: formData.whatsappNumber,
-        course: `EV Program (${formData.preferredMode.toUpperCase()} - ${formData.preferredBatch.toUpperCase()})`,
+        course: `EV & Mechanical Specialist Program (${formData.preferredMode.toUpperCase()} - ${formData.preferredBatch.toUpperCase()})`,
         experience: formData.education
       };
 
@@ -236,7 +324,7 @@ export default function App() {
         }}
       />
 
-      {/* 🟢 FIXED Mobile-Friendly Top Navigation */}
+      {/* 🟢 FIXED Top Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-800/80 bg-[#070E1C]/95 backdrop-blur-md px-3 py-2.5 sm:px-8 sm:py-3 shadow-xl">
         <div className="h-1 w-full bg-gradient-to-r from-cyan-500 via-orange-500 to-blue-600 absolute top-0 left-0 right-0" />
 
@@ -276,7 +364,8 @@ export default function App() {
             >
               About Us
             </button>
-            <a href="#curriculum" className="text-slate-300 hover:text-orange-400 px-2 py-0.5 flex-shrink-0">Outline</a>
+            <a href="#curriculum" className="text-slate-300 hover:text-orange-400 px-2 py-0.5 flex-shrink-0">Curriculum (8 Modules)</a>
+            <a href="#prototyping" className="text-cyan-400 hover:text-cyan-300 px-2 py-0.5 flex-shrink-0 font-bold">Academic Projects</a>
             <a href="#pathways" className="text-slate-300 hover:text-orange-400 px-2 py-0.5 flex-shrink-0">Careers</a>
             <a href="#partners" className="text-slate-300 hover:text-orange-400 px-2 py-0.5 flex-shrink-0">Hiring Network</a>
             <a href="#gallery" className="text-slate-300 hover:text-orange-400 px-2 py-0.5 flex-shrink-0">Lab Gallery</a>
@@ -288,29 +377,28 @@ export default function App() {
       {/* ⚡ Hero Section */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 pt-28 sm:pt-36 pb-12 sm:pb-20 space-y-16 sm:space-y-20">
         <section className="text-center space-y-4 sm:space-y-6 max-w-3xl mx-auto">
-          {/* 🎓 Highlighted Mode Availability */}
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500/15 via-amber-500/15 to-cyan-500/15 border border-orange-500/40 px-3.5 py-1.5 rounded-full text-xs text-white font-semibold shadow-inner">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Available in <strong className="text-orange-400">Offline (Anantapur Lab)</strong> & <strong className="text-cyan-400">Live Online</strong> Modes</span>
+            <span>EV Powertrains • Turbo Engines • Axles • ADAS & AI</span>
           </div>
           
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
-            Power India's EV Future. <br />
+            Advanced EV & Mechanical Systems. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-cyan-400">
               Get Certified and Placed in 60 Days.
             </span>
           </h2>
           
           <p className="text-xs sm:text-base text-slate-300 leading-relaxed px-2">
-            Hands-on practical training aligned with ASDC & NSDC standards for ITI, Diploma, and Engineering students. Step away from traditional textbooks and troubleshoot real battery packs, motor powertrains, and BMS software systems.
+            Step away from ordinary theory. Master active cell balancing, MATLAB dynamic simulations, BMS diagnostics, and autonomous ADAS algorithms alongside full hands-on teardowns of turbocharged engines, manual/auto gearboxes, and heavy drive axles.
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 pt-4 text-left">
             {[
-              { label: "Training Mode", value: "Offline Lab & Online Live" },
-              { label: "First Batch Special", value: "₹20,000/- Only" },
-              { label: "Pioneer Slots", value: "30 Seats Available" },
-              { label: "Fee Option", value: "Easy 2-Part Installments" }
+              { label: "Learning Mode", value: "Offline Lab & Online Live" },
+              { label: "Pioneer Launch Batch", value: "₹20,000/- Only" },
+              { label: "Academic Projects", value: "B.Tech & Diploma Ready" },
+              { label: "Limited Seats", value: "First 30 Registrations" }
             ].map((m, idx) => (
               <div key={idx} className="bg-slate-900/60 backdrop-blur-sm border border-slate-800 p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg">
                 <span className="text-[9px] sm:text-[10px] text-orange-400 uppercase font-bold tracking-wider block">{m.label}</span>
@@ -320,230 +408,306 @@ export default function App() {
           </div>
         </section>
 
-        {/* 📚 Interactive Curriculum Section */}
-        <section id="curriculum" className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
-          <div className="space-y-4 sm:space-y-6">
-            <div>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Classroom & Lab Setup</span>
-              <h3 className="text-xl sm:text-2xl font-black text-white mt-1">What You Will Master</h3>
-              <p className="text-xs text-slate-300 mt-1">
-                Our syllabus matches hiring criteria established by leading Indian OEMs, battery manufacturers, and fleet operators.
-              </p>
-            </div>
+        {/* 📚 Comprehensive Curriculum Section */}
+        <section id="curriculum" className="space-y-6">
+          <div className="text-center max-w-3xl mx-auto space-y-1.5">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Industry-Standard Blueprint</span>
+            <h3 className="text-xl sm:text-3xl font-black text-white">Comprehensive 8-Module Syllabus</h3>
+            <p className="text-xs text-slate-300">
+              Covering everything from battery chemistry and motor vector control to heavy mechanical assemblies and vehicle AI.
+            </p>
+          </div>
 
-            <div className="space-y-2.5 sm:space-y-3">
-              {syllabusDays.map((phase, idx) => (
-                <div key={idx} className="bg-slate-900/80 backdrop-blur-md border border-slate-800 rounded-xl sm:rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* Accordion Column */}
+            <div className="lg:col-span-7 space-y-3">
+              {curriculumModules.map((mod, idx) => (
+                <div key={idx} className="bg-slate-900/80 backdrop-blur-md border border-slate-800 rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-200">
                   <button
                     onClick={() => toggleAccordion(idx)}
                     className="w-full text-left px-4 py-3.5 sm:px-5 sm:py-4 flex justify-between items-center focus:outline-none"
                   >
-                    <span className="text-xs font-extrabold text-white pr-2">{phase.title}</span>
-                    <span className="text-orange-400 text-base font-bold flex-shrink-0">
+                    <div className="space-y-1 pr-3">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[9px] uppercase font-bold text-orange-400 bg-orange-500/10 px-2 py-0.5 rounded border border-orange-500/20">{mod.moduleNumber}</span>
+                        <span className="text-[9px] uppercase font-semibold text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">{mod.badge}</span>
+                      </div>
+                      <h4 className="text-xs sm:text-sm font-extrabold text-white leading-snug">{mod.title}</h4>
+                    </div>
+                    <span className="text-orange-400 text-lg font-black flex-shrink-0">
                       {activeAccordion === idx ? '−' : '+'}
                     </span>
                   </button>
+
                   {activeAccordion === idx && (
-                    <div className="px-4 pb-4 pt-1 sm:px-5 sm:pb-5 text-xs text-slate-300 leading-relaxed border-t border-slate-800/50">
-                      {phase.content}
+                    <div className="px-4 pb-4 pt-1 sm:px-5 sm:pb-5 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 space-y-3">
+                      <p className="text-[11px] text-slate-400 italic">{mod.description}</p>
+                      
+                      <div className="bg-slate-950/70 p-2.5 rounded-lg border border-slate-800/80">
+                        <span className="text-[10px] text-orange-400 uppercase font-black tracking-wider block mb-0.5">Software & Diagnostic Tools:</span>
+                        <span className="text-[11px] font-mono text-cyan-300">{mod.tools}</span>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] text-slate-300 uppercase font-bold tracking-wider block">Hands-On Scope & Lab Exercises:</span>
+                        <ul className="space-y-1.5">
+                          {mod.topics.map((topic, tIdx) => (
+                            <li key={tIdx} className="flex items-start text-[11px] text-slate-300">
+                              <span className="text-orange-400 mr-2 font-bold">⚡</span>
+                              <span>{topic}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   )}
                 </div>
               ))}
             </div>
+
+            {/* Registration Form Column */}
+            <div id="apply" className="lg:col-span-5 bg-slate-900/90 backdrop-blur-md border border-orange-500/30 rounded-2xl sm:rounded-3xl p-5 sm:p-7 space-y-4 shadow-2xl relative lg:sticky lg:top-24">
+              <div>
+                <span className="text-[10px] font-black uppercase text-orange-400 tracking-widest">Pioneer Enrollment</span>
+                <h3 className="text-lg sm:text-xl font-extrabold text-white">Join the Pioneer Batch</h3>
+                <p className="text-xs text-slate-300 mt-0.5">
+                  Reserve your seat for the upcoming batch in Anantapur or Live Online.
+                </p>
+              </div>
+
+              {/* 🏷️ Special Pricing Promo Card */}
+              <div className="bg-gradient-to-r from-orange-500/20 via-amber-500/10 to-emerald-500/20 border border-orange-500/40 rounded-xl p-3.5 text-center space-y-1 shadow-lg">
+                <span className="text-[10px] font-black uppercase text-orange-400 tracking-wider block">
+                  🔥 Inaugural Pioneer Batch Offer
+                </span>
+                <div className="flex items-center justify-center gap-2 pt-0.5">
+                  <span className="text-sm sm:text-base text-slate-400 line-through font-bold decoration-red-500 decoration-2">
+                    ₹40,000/-
+                  </span>
+                  <span className="text-2xl sm:text-3xl font-black text-emerald-400 drop-shadow-[0_0_12px_rgba(52,211,153,0.5)]">
+                    ₹20,000/-
+                  </span>
+                  <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[9px] font-black px-2 py-0.5 rounded-md uppercase">
+                    50% OFF
+                  </span>
+                </div>
+                <p className="text-[10px] text-slate-300 font-medium">
+                  Flat 50% waiver applied for the first 30 students only.
+                </p>
+              </div>
+
+              {isSubmitted ? (
+                <div id="success-message" className="bg-emerald-500/10 border border-emerald-500/30 p-5 rounded-xl text-center space-y-3">
+                  <div className="h-10 w-10 bg-emerald-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-lg font-bold">
+                    ✓
+                  </div>
+                  <h4 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
+                    Registration Secured Successfully!
+                  </h4>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    An industrial technical onboarding blueprint has been dispatched to your email.
+                  </p>
+                  <div className="bg-slate-950/80 border border-slate-800 p-3 rounded-xl text-left space-y-1.5">
+                    <span className="text-[9px] uppercase font-bold tracking-widest text-emerald-400 block">Next Steps:</span>
+                    <p className="text-[10px] sm:text-[11px] text-slate-300 leading-normal">
+                      • Coordinators will contact your WhatsApp within 24 hours.<br />
+                      • Direct Email: <a href="mailto:admissions@evisionarysolutionsindia.com" className="text-orange-400 font-bold underline">admissions@evisionarysolutionsindia.com</a>
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-3 relative z-10">
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Full Student Name</label>
+                    <input
+                      type="text"
+                      name="studentName"
+                      value={formData.studentName}
+                      onChange={handleInputChange}
+                      placeholder="Enter your full name"
+                      className={`w-full bg-slate-950/90 border ${formErrors.studentName ? 'border-red-500' : 'border-slate-800'} rounded-xl py-2.5 px-3 text-xs text-white focus:outline-none focus:border-orange-500`}
+                    />
+                    {formErrors.studentName && <span className="text-[10px] text-red-400 block mt-1">{formErrors.studentName}</span>}
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Active WhatsApp Number</label>
+                    <input
+                      type="tel"
+                      name="whatsappNumber"
+                      value={formData.whatsappNumber}
+                      onChange={handleInputChange}
+                      placeholder="10-digit mobile number"
+                      className={`w-full bg-slate-950/90 border ${formErrors.whatsappNumber ? 'border-red-500' : 'border-slate-800'} rounded-xl py-2.5 px-3 text-xs text-white focus:outline-none focus:border-orange-500`}
+                    />
+                    {formErrors.whatsappNumber && <span className="text-[10px] text-red-400 block mt-1">{formErrors.whatsappNumber}</span>}
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Email Address</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="name@example.com"
+                      className={`w-full bg-slate-950/90 border ${formErrors.email ? 'border-red-500' : 'border-slate-800'} rounded-xl py-2.5 px-3 text-xs text-white focus:outline-none focus:border-orange-500`}
+                    />
+                    {formErrors.email && <span className="text-[10px] text-red-400 block mt-1">{formErrors.email}</span>}
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Academic Status / Goal</label>
+                    <select
+                      name="education"
+                      value={formData.education}
+                      onChange={handleInputChange}
+                      className={`w-full bg-slate-950/90 border ${formErrors.education ? 'border-red-500' : 'border-slate-800'} rounded-xl py-2.5 px-3 text-xs text-slate-200 focus:outline-none focus:border-orange-500`}
+                    >
+                      <option value="">Select qualification</option>
+                      <option value="BTech-FinalYear">B.Tech Final Year (Seeking Project / Placement)</option>
+                      <option value="Diploma-FinalYear">Diploma Final Year (Seeking Project / Placement)</option>
+                      <option value="BTech-Grad">B.E. / B.Tech Graduate (Mech, EEE, ECE)</option>
+                      <option value="Diploma-Grad">Diploma Graduate (Auto / EEE / Mech)</option>
+                      <option value="ITI">ITI (Electrical / Mechanic / Fitter)</option>
+                      <option value="Professional">Working Automotive / Mechanical Technician</option>
+                    </select>
+                    {formErrors.education && <span className="text-[10px] text-red-400 block mt-1">{formErrors.education}</span>}
+                  </div>
+
+                  {/* Mode Selector */}
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Preferred Training Mode</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { value: "offline", label: "Offline (Anantapur Lab)" },
+                        { value: "online", label: "Live Online Classes" }
+                      ].map((mode) => (
+                        <label
+                          key={mode.value}
+                          className={`border rounded-xl p-2 flex items-center justify-center cursor-pointer text-center transition-all ${
+                            formData.preferredMode === mode.value
+                              ? 'border-cyan-400 bg-cyan-500/10 text-cyan-300 font-bold'
+                              : 'border-slate-800 text-slate-400'
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="preferredMode"
+                            value={mode.value}
+                            checked={formData.preferredMode === mode.value}
+                            onChange={handleInputChange}
+                            className="hidden"
+                          />
+                          <span className="text-[10px]">{mode.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Batch Schedule</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { value: "morning", label: "Morning (8 AM - 12 PM)" },
+                        { value: "afternoon", label: "Afternoon (1 PM - 5 PM)" }
+                      ].map((batch) => (
+                        <label
+                          key={batch.value}
+                          className={`border rounded-xl p-2 flex items-center justify-center cursor-pointer text-center transition-all ${
+                            formData.preferredBatch === batch.value
+                              ? 'border-orange-500 bg-orange-500/10 text-orange-400 font-bold'
+                              : 'border-slate-800 text-slate-400'
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="preferredBatch"
+                            value={batch.value}
+                            checked={formData.preferredBatch === batch.value}
+                            onChange={handleInputChange}
+                            className="hidden"
+                          />
+                          <span className="text-[10px]">{batch.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                    {formErrors.preferredBatch && <span className="text-[10px] text-red-400 block mt-1">{formErrors.preferredBatch}</span>}
+                  </div>
+
+                  <label className="flex items-start gap-2 pt-1 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="verifiedChecked"
+                      checked={formData.verifiedChecked}
+                      onChange={handleInputChange}
+                      className="mt-0.5 accent-orange-500 h-4 w-4 rounded"
+                    />
+                    <span className="text-[10px] text-slate-400 leading-tight">
+                      I confirm my enrollment interest for ₹20,000/- (Pioneer Batch).
+                    </span>
+                  </label>
+                  {formErrors.verifiedChecked && <span className="text-[10px] text-red-400 block mt-1">{formErrors.verifiedChecked}</span>}
+
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full py-3 px-5 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-slate-950 font-black rounded-xl shadow-lg uppercase text-xs cursor-pointer min-h-[42px]"
+                  >
+                    {isLoading ? "Reserving Slot..." : "Reserve My Seat @ ₹20,000/-"}
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* 🎓 DEDICATED PROTOTYPING & FINAL YEAR PROJECTS SECTION */}
+        <section id="prototyping" className="bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-cyan-500/30 rounded-3xl p-6 sm:p-10 space-y-6 relative overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-[10px] font-black uppercase text-cyan-400 tracking-widest bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-full">
+              For Engineering & Diploma Final-Year Students
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-black text-white">
+              Academic Projects & Custom Hardware Prototyping
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300">
+              We guide B.Tech and Diploma students from concept to fully functioning physical hardware prototypes—delivering IEEE-compliant documentation, working simulation files, and hands-on lab fabrication.
+            </p>
           </div>
 
-          {/* 📝 Registration Form Container */}
-          <div id="apply" className="bg-slate-900/90 backdrop-blur-md border border-orange-500/20 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-5 shadow-2xl relative">
-            <div className="text-center lg:text-left relative z-10">
-              <span className="text-[10px] font-black uppercase text-orange-400 tracking-widest">Pioneer Enrollment</span>
-              <h3 className="text-lg sm:text-xl font-extrabold text-white">Join the Pioneer Batch</h3>
-              <p className="text-xs text-slate-300 mt-0.5">
-                Reserve your seat for the upcoming launch batch in Anantapur or Online.
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-2">
+            <div className="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl space-y-3">
+              <div className="h-10 w-10 bg-cyan-500/10 border border-cyan-500/30 rounded-xl flex items-center justify-center text-cyan-400 font-black text-lg">
+                01
+              </div>
+              <h4 className="text-sm font-bold text-white">Custom Prototype Fabrication</h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Build real working projects: Retrofit EV conversions, custom active BMS boards, IoT CAN telemetry trackers, solar-assisted fast charging rigs, and autonomous robot testbeds.
               </p>
             </div>
 
-            {/* 🏷️ SPECIAL FIRST BATCH PRICING PROMO CARD */}
-            <div className="bg-gradient-to-r from-orange-500/20 via-amber-500/10 to-emerald-500/20 border border-orange-500/40 rounded-xl p-3.5 sm:p-4 text-center space-y-1 shadow-lg">
-              <span className="text-[10px] font-black uppercase text-orange-400 tracking-wider block">
-                🔥 First Batch Exclusive Inaugural Offer
-              </span>
-              <div className="flex items-center justify-center gap-2 pt-0.5">
-                <span className="text-sm sm:text-base text-slate-400 line-through font-bold decoration-red-500 decoration-2">
-                  ₹40,000/-
-                </span>
-                <span className="text-2xl sm:text-3xl font-black text-emerald-400 drop-shadow-[0_0_12px_rgba(52,211,153,0.5)]">
-                  ₹20,000/-
-                </span>
-                <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[9px] font-black px-2 py-0.5 rounded-md uppercase">
-                  50% OFF
-                </span>
+            <div className="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl space-y-3">
+              <div className="h-10 w-10 bg-orange-500/10 border border-orange-500/30 rounded-xl flex items-center justify-center text-orange-400 font-black text-lg">
+                02
               </div>
-              <p className="text-[10px] text-slate-300 font-medium">
-                Flat 50% waiver applied for the first 30 students only. Reserve your slot today!
+              <h4 className="text-sm font-bold text-white">Mechanical & Powertrain Rigs</h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Hands-on project work on turbocharged IC engines, regenerative dyno testing, planetary gear reduction boxes, and custom differential axle mechanisms.
               </p>
             </div>
 
-            {isSubmitted ? (
-              <div id="success-message" className="bg-emerald-500/10 border border-emerald-500/30 p-5 rounded-xl text-center space-y-3">
-                <div className="h-10 w-10 bg-emerald-500 text-slate-950 rounded-full flex items-center justify-center mx-auto text-lg font-bold">
-                  ✓
-                </div>
-                <h4 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
-                  Registration Secured Successfully!
-                </h4>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  An industrial technical onboarding blueprint has been dispatched to your email.
-                </p>
-                <div className="bg-slate-950/80 border border-slate-800 p-3 sm:p-4 rounded-xl text-left space-y-1.5">
-                  <span className="text-[9px] uppercase font-bold tracking-widest text-emerald-400 block">Next Steps:</span>
-                  <p className="text-[10px] sm:text-[11px] text-slate-300 leading-normal">
-                    • Coordinators will contact your WhatsApp within 24 hours.<br />
-                    • Direct Email: <a href="mailto:admissions@evisionarysolutionsindia.com" className="text-orange-400 font-bold underline">admissions@evisionarysolutionsindia.com</a>
-                  </p>
-                </div>
+            <div className="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl space-y-3">
+              <div className="h-10 w-10 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center justify-center text-emerald-400 font-black text-lg">
+                03
               </div>
-            ) : (
-              <form onSubmit={handleFormSubmit} className="space-y-3.5 relative z-10">
-                <div>
-                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Full Student Name</label>
-                  <input
-                    type="text"
-                    name="studentName"
-                    value={formData.studentName}
-                    onChange={handleInputChange}
-                    placeholder="Enter your full name"
-                    className={`w-full bg-slate-950/90 border ${formErrors.studentName ? 'border-red-500' : 'border-slate-800'} rounded-xl py-3 px-3.5 text-base sm:text-xs text-white focus:outline-none focus:border-orange-500`}
-                  />
-                  {formErrors.studentName && <span className="text-[10px] text-red-400 block mt-1">{formErrors.studentName}</span>}
-                </div>
-
-                <div>
-                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Active WhatsApp Number</label>
-                  <input
-                    type="tel"
-                    name="whatsappNumber"
-                    value={formData.whatsappNumber}
-                    onChange={handleInputChange}
-                    placeholder="10-digit mobile number"
-                    className={`w-full bg-slate-950/90 border ${formErrors.whatsappNumber ? 'border-red-500' : 'border-slate-800'} rounded-xl py-3 px-3.5 text-base sm:text-xs text-white focus:outline-none focus:border-orange-500`}
-                  />
-                  {formErrors.whatsappNumber && <span className="text-[10px] text-red-400 block mt-1">{formErrors.whatsappNumber}</span>}
-                </div>
-
-                <div>
-                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Email Address</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="name@example.com"
-                    className={`w-full bg-slate-950/90 border ${formErrors.email ? 'border-red-500' : 'border-slate-800'} rounded-xl py-3 px-3.5 text-base sm:text-xs text-white focus:outline-none focus:border-orange-500`}
-                  />
-                  {formErrors.email && <span className="text-[10px] text-red-400 block mt-1">{formErrors.email}</span>}
-                </div>
-
-                <div>
-                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Educational Qualification</label>
-                  <select
-                    name="education"
-                    value={formData.education}
-                    onChange={handleInputChange}
-                    className={`w-full bg-slate-950/90 border ${formErrors.education ? 'border-red-500' : 'border-slate-800'} rounded-xl py-3 px-3.5 text-base sm:text-xs text-slate-200 focus:outline-none focus:border-orange-500`}
-                  >
-                    <option value="">Select qualification</option>
-                    <option value="ITI">ITI (Electrical / Mechanic / Fitter)</option>
-                    <option value="Diploma">Diploma (EEE / ME / ECE / Auto)</option>
-                    <option value="BTech">B.E. / B.Tech (Mech, EEE, ECE)</option>
-                    <option value="Vocational">Vocational Electrical Streams</option>
-                  </select>
-                  {formErrors.education && <span className="text-[10px] text-red-400 block mt-1">{formErrors.education}</span>}
-                </div>
-
-                {/* 📍 PREFERRED TRAINING MODE SELECTOR */}
-                <div>
-                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Preferred Learning Mode</label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {[
-                      { value: "offline", label: "Offline (Anantapur Lab)" },
-                      { value: "online", label: "Live Online Classes" }
-                    ].map((mode) => (
-                      <label
-                        key={mode.value}
-                        className={`border rounded-xl p-2.5 flex items-center justify-center cursor-pointer text-center transition-all ${
-                          formData.preferredMode === mode.value
-                            ? 'border-cyan-400 bg-cyan-500/10 text-cyan-300 font-bold'
-                            : 'border-slate-800 text-slate-400'
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="preferredMode"
-                          value={mode.value}
-                          checked={formData.preferredMode === mode.value}
-                          onChange={handleInputChange}
-                          className="hidden"
-                        />
-                        <span className="text-[10px]">{mode.label}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-[10px] uppercase font-bold text-slate-300 tracking-wider mb-1">Preferred Batch Schedule</label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {[
-                      { value: "morning", label: "Morning (8 AM - 12 PM)" },
-                      { value: "afternoon", label: "Afternoon (1 PM - 5 PM)" }
-                    ].map((batch) => (
-                      <label
-                        key={batch.value}
-                        className={`border rounded-xl p-2.5 flex items-center justify-center cursor-pointer text-center transition-all ${
-                          formData.preferredBatch === batch.value
-                            ? 'border-orange-500 bg-orange-500/10 text-orange-400 font-bold'
-                            : 'border-slate-800 text-slate-400'
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="preferredBatch"
-                          value={batch.value}
-                          checked={formData.preferredBatch === batch.value}
-                          onChange={handleInputChange}
-                          className="hidden"
-                        />
-                        <span className="text-[10px]">{batch.label}</span>
-                      </label>
-                    ))}
-                  </div>
-                  {formErrors.preferredBatch && <span className="text-[10px] text-red-400 block mt-1">{formErrors.preferredBatch}</span>}
-                </div>
-
-                <label className="flex items-start gap-2 pt-1 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="verifiedChecked"
-                    checked={formData.verifiedChecked}
-                    onChange={handleInputChange}
-                    className="mt-0.5 accent-orange-500 h-4 w-4 rounded"
-                  />
-                  <span className="text-[10px] text-slate-400 leading-tight">
-                    I confirm my genuine interest in reserving a Pioneer Batch seat for ₹20,000/-.
-                  </span>
-                </label>
-                {formErrors.verifiedChecked && <span className="text-[10px] text-red-400 block mt-1">{formErrors.verifiedChecked}</span>}
-
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full py-3.5 px-5 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-slate-950 font-black rounded-xl shadow-lg uppercase text-xs cursor-pointer min-h-[44px]"
-                >
-                  {isLoading ? "Reserving Slot..." : "Reserve My Seat @ ₹20,000/-"}
-                </button>
-              </form>
-            )}
+              <h4 className="text-sm font-bold text-white">Complete Thesis & Viva Preparation</h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Receive complete project reports, circuit schematics, MATLAB / Simulink simulation models, Python computer vision codes, and 1-on-1 external viva guidance.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -605,7 +769,7 @@ export default function App() {
         <section id="gallery" className="border-t border-slate-800/80 pt-12 space-y-6">
           <div className="text-center max-w-2xl mx-auto space-y-1.5">
             <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Anantapur Center</span>
-            <h3 className="text-xl sm:text-2xl font-black text-white">Our Practical Rigs</h3>
+            <h3 className="text-xl sm:text-2xl font-black text-white">Our Practical Rigs & Heavy Testing Bays</h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
@@ -614,7 +778,7 @@ export default function App() {
                 <div className="aspect-video w-full bg-slate-950 overflow-hidden relative">
                   <img 
                     src={item.src} 
-                    alt={`EV Lab Station ${idx + 1}`}
+                    alt={`Lab Station ${idx + 1}`}
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.style.display = 'none';
@@ -622,7 +786,7 @@ export default function App() {
                     }}
                   />
                   <div className="hidden absolute inset-0 bg-slate-900 items-center justify-center p-3 text-center border-b border-slate-800">
-                    <span className="text-[10px] text-slate-400 uppercase font-bold">🔧 Station {idx + 1}</span>
+                    <span className="text-[10px] text-slate-400 uppercase font-bold">🔧 Rig {idx + 1}</span>
                   </div>
                 </div>
                 <div className="p-3 bg-slate-900/40">
@@ -634,13 +798,12 @@ export default function App() {
         </section>
       </main>
 
-      {/* 📄 Footer with Clickable Google Maps Address */}
+      {/* 📄 Footer */}
       <footer className="relative z-10 border-t border-slate-850 bg-[#040810] py-6 px-4 text-center space-y-2">
         <p className="text-[10px] text-slate-400">
           © {new Date().getFullYear()} M/S <span className="text-orange-400 font-bold">EV</span>ISIONARY SOLUTIONS INDIA [Regd No: 42 of 2026].
         </p>
         
-        {/* Clickable Google Maps Link */}
         <a 
           href="https://maps.google.com/?q=Ramnagar+80ft+Road+Near+Neru+Pragathi+Park+Anantapur" 
           target="_blank" 
@@ -652,7 +815,7 @@ export default function App() {
         </a>
       </footer>
 
-      {/* 💬 FLOATING WHATSAPP QUICK-CHAT BUTTON */}
+      {/* 💬 FLOATING WHATSAPP BUTTON */}
       <a 
         href="https://wa.me/917899474996?text=Hi%20EVisionary%20Solutions,%20I%20want%20to%20reserve%20a%20seat%20for%20the%20first%20batch%20at%2020,000/-" 
         target="_blank" 
