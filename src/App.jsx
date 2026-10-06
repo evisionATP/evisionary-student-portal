@@ -54,8 +54,8 @@ export default function App() {
   const curriculumModules = [
     {
       moduleNumber: "Module 01",
-      title: "EV Architecture, Vehicle Dynamics & MATLAB/Simulink Sizing",
-      tools: "MATLAB, Simulink, Powertrain Blockset",
+      title: "EV Architecture, Vehicle Dynamics  & Drive Cycle Simulations",
+      tools: "Powertrain Blockset",
       badge: "Software & Sizing",
       description: "Mathematical modeling of EV dynamics, tractive effort equations, component sizing, and drive-cycle simulations.",
       topics: [
@@ -68,7 +68,7 @@ export default function App() {
     {
       moduleNumber: "Module 02",
       title: "Advanced Battery Technology, Pack Engineering & Active BMS Diagnostics",
-      tools: "MATLAB Simscape, Active BMS Hardware Rigs, Thermal Loggers",
+      tools: "Active BMS Hardware Rigs, Thermal Loggers",
       badge: "Cell to Pack Hardware",
       description: "Deep dive into Lithium-ion chemistries, thermal runaway prevention, CAN bus battery logging, and physical pack assembly.",
       topics: [
@@ -106,45 +106,17 @@ export default function App() {
     },
     {
       moduleNumber: "Module 05",
-      title: "Autonomous Driving Systems (ADAS), Perception & Computer Vision",
-      tools: "Python, OpenCV, CARLA Simulator, ROS (Robot Operating System)",
+      title: "Autonomous Driving Systems (ADAS)",
+      tools: "ADAS Basics",
       badge: "Autonomous Systems",
       description: "Build ADAS algorithms and test autonomy sensor stacks on physical vision rigs and simulation testbeds.",
       topics: [
-        "ADAS Architectures: SAE Autonomy Levels (Level 1 to Level 5) and sensor suite integration (Cameras, Radar, LiDAR, Ultrasonic).",
-        "Computer Vision with Python & OpenCV: Edge detection (Canny), Hough line lane-detection transforms, and stereo depth estimation.",
         "ADAS Safety Features: Implementation of Automatic Emergency Braking (AEB), Forward Collision Warning (FCW), Blind Spot Detection, and Lane Keep Assist.",
         "Hardware-in-the-Loop Simulation: Running CARLA autonomous test tracks and sensor fusion algorithms using Artificial Neural Networks (ANN/CNN)."
       ]
     },
     {
       moduleNumber: "Module 06",
-      title: "Connected Vehicles (V2X), Automotive Embedded Systems & HIL Testing",
-      tools: "STM32CubeIDE, FreeRTOS, PeakCAN, CANoe, Wireshark, dSPACE",
-      badge: "Embedded & IoT",
-      description: "Automotive ECU firmware development, real-time operating systems, vehicle networking, and cyber resilience.",
-      topics: [
-        "Automotive Embedded Architectures: Microcontrollers (STM32, ARM Cortex-M), timers, ADC, interrupt handling, and RTOS task scheduling.",
-        "Connected Car & V2X: Vehicle-to-Vehicle (V2V), Vehicle-to-Infrastructure (V2I), IoT telematics gateways, GPS tracking, and Fastag protocols.",
-        "Automotive Protocols & HIL: CAN, LIN, Ethernet, and dSPACE / CANoe hardware-in-the-loop diagnostic logging.",
-        "Automotive Cybersecurity: Secure bootloaders, CAN injection attack mitigation, SSL/TLS vehicular communication, and penetration testing."
-      ]
-    },
-    {
-      moduleNumber: "Module 07",
-      title: "Applied AI & Machine Learning in Automotive Systems",
-      tools: "TensorFlow, Scikit-Learn, Edge-AI Accelerator Kits",
-      badge: "Industrial AI",
-      description: "Deploy machine learning for real-time battery degradation alerts, vehicle predictive maintenance, and conversational cabin AI.",
-      topics: [
-        "Predictive Maintenance: ML algorithms analyzing sensor telemetry to forecast motor bearing wear, brake pad life, and battery thermal health.",
-        "EV Energy Optimization: AI-driven range prediction taking into account topology, driver habits, climate control, and route conditions.",
-        "Cabin AI: Natural Language Processing (NLP) voice assistants, driver drowsiness detection cameras, and cabin personalization.",
-        "Manufacturing AI: Robotic vision inspection for automated weld-joint defect detection and intelligent factory supply-chain scheduling."
-      ]
-    },
-    {
-      moduleNumber: "Module 08",
       title: "Final-Year B.Tech & Diploma Academic Capstone & Custom Prototyping Hub",
       tools: "3D CAD, Custom CNC, PCB Fabrication, Dyno Test Bench",
       badge: "Major / Minor Project & Patenting",
